@@ -12,18 +12,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.create.AppClient;
+import com.example.create.dialog.DJS_dialog;
 import com.example.create.R;
 import com.example.create.bean.Q_YHZC_SQL;
-import com.example.create.dialog.DJS_dialog;
-
 import org.litepal.LitePal;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 public class Q_YHDR extends AppCompatActivity {
 
     @BindView(R.id.tv_yhzc)
@@ -46,7 +43,6 @@ public class Q_YHDR extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private DJS_dialog djs_dialog;
     private int x = 3;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,10 +57,7 @@ public class Q_YHDR extends AppCompatActivity {
             Mimaet.setText(password);
             cb1.setChecked(true);
         }
-
     }
-
-
     private void setRun() {
         new Thread(new Runnable() {
             @Override
@@ -96,12 +89,13 @@ public class Q_YHDR extends AppCompatActivity {
                     editor.clear();
                 }
                 editor.apply();
+                AppClient.addUser(account);
                 Toast.makeText(this, "登入成功", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
         Toast.makeText(this, "登入失败", Toast.LENGTH_SHORT).show();
-        x=x-1;
+        x = x - 1;
         if (x == 0) {
             djs_dialog = new DJS_dialog();
             djs_dialog.setCancelable(false);

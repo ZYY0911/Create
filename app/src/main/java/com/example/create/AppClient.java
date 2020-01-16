@@ -2,6 +2,7 @@ package com.example.create;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.android.volley.RequestQueue;
@@ -46,10 +47,15 @@ public class AppClient extends Application {
         preferences.edit().putString("Kt", info).apply();
     }
 
+    public static void addUser(String username) {
+        preferences.edit().putString("username", username).apply();
+    }
+    public static String getUser() {
+        return preferences.getString("username", "xxx");
+    }
     public void setLight(boolean light) {
         preferences.edit().putBoolean("light", light).apply();
     }
-
     public boolean getLight() {
         return preferences.getBoolean("light", false);
     }
