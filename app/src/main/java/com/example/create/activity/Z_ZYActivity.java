@@ -10,9 +10,19 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+import com.example.create.AppClient;
 import com.example.create.R;
+import com.example.create.http.Z_MyService;
+import com.example.create.net.VolleyLo;
+import com.example.create.net.VolleyTo;
 import com.example.create.util.SimpData;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Date;
 import java.util.Random;
 
@@ -44,13 +54,15 @@ public class Z_ZYActivity extends AppCompatActivity {
     private TextView timg4;
     private TextView timg5;
     private boolean isLoop = true;
+    private AppClient appClient;
+    private Z_MyService z_myService;
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what==0){
                 Random random = new Random();
                 nowTime.setText(SimpData.Simp("HH:mm",new Date()));
-                int wd = random.nextInt(40);
+                /*int wd = random.nextInt(40);
                 int dl = random.nextInt(150);
                 int kt = random.nextInt(2);
                 switch (kt){
@@ -64,7 +76,7 @@ public class Z_ZYActivity extends AppCompatActivity {
                 outWd.setText(wd+"˚C");
                 inWd.setText((wd-5)+"˚C");
                 butteryIn.setText(dl+"kw/h");
-                butteryOut.setText((dl-44)+"kw/h");
+                butteryOut.setText((dl-44)+"kw/h");*/
 
             }
             return false;
@@ -78,6 +90,45 @@ public class Z_ZYActivity extends AppCompatActivity {
         initView();
         initClick();
         initData();
+        initVolley();
+        z_myService = new Z_MyService(3333,appClient);
+        try {
+            z_myService.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initVolley() {
+        VolleyTo volleyTo = new VolleyTo();
+        volleyTo.setUrl("get_factory_info")
+                .setLoop(true)
+                .setTime(5000)
+                .setVolleyLo(new VolleyLo() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        JSONArray jsonArray = jsonObject.optJSONArray("ROWS_DETAIL");
+                        JSONObject jsonObject1 = jsonArray.optJSONObject(0);
+                        carAir.setText(jsonObject1.optString("kt"));
+                        outWd.setText(jsonObject1.optString("intWd")+"˚C");
+                        inWd.setText(jsonObject1.optString("outWd")+"˚C");
+                        butteryIn.setText(jsonObject1.optString("butteryIn")+"kw/h");
+                        butteryOut.setText(jsonObject1.optString("butteryOut")+"kw/h");
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                    }
+                }).start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (z_myService!=null){
+            z_myService.stop();
+        }
     }
 
     private void initData() {
@@ -138,6 +189,7 @@ public class Z_ZYActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        appClient = (AppClient) getApplication();
         bgImage = findViewById(R.id.bg_image);
         outWd = findViewById(R.id.out_wd);
         inWd = findViewById(R.id.in_wd);

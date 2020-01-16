@@ -12,9 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.create.Dialog.DJS_dialog;
 import com.example.create.R;
 import com.example.create.bean.Q_YHZC_SQL;
+import com.example.create.dialog.DJS_dialog;
 
 import org.litepal.LitePal;
 
@@ -98,18 +98,16 @@ public class Q_YHDR extends AppCompatActivity {
                 editor.apply();
                 Toast.makeText(this, "登入成功", Toast.LENGTH_SHORT).show();
                 return;
-            } else if (!account.equals(sql.getYhm()) && password.equals(sql.getMima())) {
-                x=x-1;
-                if (x == 0) {
-                    djs_dialog = new DJS_dialog();
-                    djs_dialog.setCancelable(false);
-                    djs_dialog.show(getSupportFragmentManager(), "");
-                    setRun();
-                }
             }
         }
-
-
+        Toast.makeText(this, "登入失败", Toast.LENGTH_SHORT).show();
+        x=x-1;
+        if (x == 0) {
+            djs_dialog = new DJS_dialog();
+            djs_dialog.setCancelable(false);
+            djs_dialog.show(getSupportFragmentManager(), "");
+            setRun();
+        }
     }
 
     @OnClick({R.id.bt_qd, R.id.bt_qx, R.id.tv_yhzc, R.id.tv_zhma})

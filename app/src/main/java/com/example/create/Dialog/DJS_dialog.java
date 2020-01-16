@@ -1,4 +1,4 @@
-package com.example.create.Dialog;
+package com.example.create.dialog;
 
 import android.app.Dialog;
 import android.content.Intent;
