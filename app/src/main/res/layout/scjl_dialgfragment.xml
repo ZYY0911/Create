@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/z_head"/>
+
+
+    <TextView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:text="上传简历"
+        android:textColor="#004074"/>
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#004074"
+            android:text="上传文件："
+            android:textSize="30sp"/>
+
+        <EditText
+            android:id="@+id/et_wj"
+            android:theme="@style/MyEditText"
+            android:layout_width="400dp"
+            android:layout_height="55dp"
+            />
+        <Button
+            android:id="@+id/bt_look"
+            android:background="@drawable/lan_jl"
+            android:layout_width="100dp"
+            android:layout_height="55dp"
+            android:textSize="30sp"
+            android:text="浏览"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#004074"
+            android:text="简历名称："
+            android:textSize="30sp"/>
+
+        <EditText
+            android:id="@+id/et_mc"
+            android:theme="@style/MyEditText"
+            android:layout_width="500dp"
+            android:layout_height="55dp"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#004074"
+            android:text="备注：          "
+            android:textSize="30sp"/>
+
+        <EditText
+            android:id="@+id/et_bz"
+            android:theme="@style/MyEditText"
+            android:layout_width="500dp"
+            android:layout_height="55dp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+       <Button
+           android:id="@+id/bt_submit"
+           android:background="@drawable/lan_jl"
+           android:layout_width="170dp"
+           android:layout_height="55dp"
+           android:text="确定"
+           android:textSize="30sp"
+           android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/bt_exit"
+            android:background="@drawable/lan_jl"
+            android:layout_marginLeft="200dp"
+            android:layout_width="170dp"
+            android:layout_height="55dp"
+            android:text="取消"
+            android:textSize="30sp"
+            android:textColor="#fff" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
