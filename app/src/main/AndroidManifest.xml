@@ -10,6 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.Q_ZHMM"></activity>
+        <activity android:name=".activity.Q_YHZC" />
+        <activity android:name=".activity.Q_YHDR"></activity>
         <activity android:name=".activity.Z_ZYActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +26,7 @@
         <activity android:name=".activity.Z_WDJLActivity">
 
         </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

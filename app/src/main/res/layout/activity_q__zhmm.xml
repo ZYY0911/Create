@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/q_bk"
+        android:text="找回密码"
+        android:textColor="#1F3864"
+        android:textSize="50dp"
+        android:gravity="center"/>
+    <EditText
+        android:id="@+id/zh_yhm"
+        android:layout_width="550dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/q_bk2"
+        android:gravity="center"
+        android:hint="输入用户名" />
+    <EditText
+        android:id="@+id/zh_xx"
+        android:layout_width="550dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/q_bk2"
+        android:gravity="center"
+        android:hint="输入用户名" />
+    <Button
+        android:id="@+id/bt_qd"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="550dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/q_jy"
+        android:text="确定"
+        android:textSize="30dp"/>
+
+</LinearLayout>

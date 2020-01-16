@@ -5,6 +5,7 @@
     <list>
         <mapping class="com.example.create.bean.JBXX" />
         <mapping class="com.example.create.bean.JLLB" />
+        <mapping class="com.example.create.bean.Q_YHZC_SQL" />
     </list>
 
 </litepal>
