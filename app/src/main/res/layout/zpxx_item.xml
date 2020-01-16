@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/card_view">
+
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_gsmc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="公司名称"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_hylx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="行业类型"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_gwmc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="岗位名称"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_zyyq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="专业要求"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/tv_szcs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="所在城市"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/tv_xlyq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="学历要求"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/tv_xzfw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="薪资范围"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/tv_lxyx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="联系邮箱"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_fbsj"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发布时间"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

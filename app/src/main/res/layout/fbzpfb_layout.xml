@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/z_head"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="      发布招聘信息:"
+            android:textColor="#000"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+                        <EditText
+                            android:id="@+id/et_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="企业名称"
+                            android:singleLine="true"
+                            android:textSize="30sp" />
+
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+                        <EditText
+                            android:id="@+id/et_province"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="所在地"
+                            android:singleLine="true"
+                            android:textSize="30sp" />
+
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+                        <EditText
+                            android:id="@+id/et_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="公司地址"
+                            android:singleLine="true"
+                            android:textSize="30sp" />
+
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+                    <EditText
+                        android:id="@+id/et_tel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="电话"
+                        android:singleLine="true"
+                        android:textSize="30sp" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+                    <EditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="邮箱"
+                        android:singleLine="true"
+                        android:textSize="30sp" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+                    <EditText
+                        android:id="@+id/et_gw"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:hint="岗位"
+                        android:singleLine="true"
+                        android:textSize="30sp" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+                    <EditText
+                        android:id="@+id/et_jg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="薪资"
+                        android:singleLine="true"
+                        android:textSize="30sp" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+                    <EditText
+                        android:id="@+id/et_gzjl"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="工作经历要求"
+                        android:singleLine="true"
+                        android:textSize="30sp" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+                    <EditText
+                        android:id="@+id/et_xl"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="学历要求"
+                        android:singleLine="true"
+                        android:textSize="30sp" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+                    <EditText
+                        android:id="@+id/et_major"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="专业要求"
+                        android:singleLine="true"
+                        android:textSize="30sp" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+                    <EditText
+                        android:id="@+id/et_gwyq"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="岗位要求"
+                        android:singleLine="true"
+                        android:textSize="30sp" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+
+
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/bt_save"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="40dp"
+                    android:background="@drawable/gbg"
+                    android:text="保存"
+                    android:textSize="30sp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
