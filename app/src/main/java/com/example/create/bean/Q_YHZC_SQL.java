@@ -7,6 +7,22 @@ public class Q_YHZC_SQL extends LitePalSupport {
     private String yhm;
     private String mima;
 
+    public int getJine() {
+        return jine;
+    }
+
+    public void setJine(int jine) {
+        this.jine = jine;
+    }
+
+    public Q_YHZC_SQL(String yhm, String mima, int jine, String yx) {
+        this.yhm = yhm;
+        this.mima = mima;
+        this.jine = jine;
+        this.yx = yx;
+    }
+
+    private int jine;
     public String getYhm() {
         return yhm;
     }
@@ -31,11 +47,6 @@ public class Q_YHZC_SQL extends LitePalSupport {
         this.yx = yx;
     }
 
-    public Q_YHZC_SQL(String yhm, String mima, String yx) {
-        this.yhm = yhm;
-        this.mima = mima;
-        this.yx = yx;
-    }
 
     private String yx;
 }

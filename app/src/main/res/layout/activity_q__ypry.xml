@@ -5,12 +5,60 @@
     android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="80dp"
         android:textSize="40dp"
         android:gravity="center"
         android:text="人才市场——应聘人员"
         android:textColor="#fff"
         android:background="#5590C7"/>
-    <
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="80dp"
+         android:layout_margin="20dp"
+         android:background="#F8CBAD">
+         <TextView
+             android:id="@+id/tv_zrs"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textColor="#485472"
+             android:textSize="35dp"
+             android:layout_marginTop="20dp"/>
+        <ImageView
+            android:id="@+id/iv_cd"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/cd"
+            android:layout_marginLeft="950dp"/>
+     </LinearLayout>
+    <ListView
+        android:id="@+id/lv_1"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/bu_fx"
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:background="@drawable/q_jy2"
+            android:textColor="#fff"
+            android:text="全选/反选"
+            android:layout_marginLeft="300dp"/>
+        <Button
+            android:id="@+id/bt_fs"
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:background="@drawable/q_jy2"
+            android:textColor="#fff"
+            android:text="发送应聘通知"
+            android:layout_marginLeft="250dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

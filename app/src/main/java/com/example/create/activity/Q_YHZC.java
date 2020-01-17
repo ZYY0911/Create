@@ -57,7 +57,7 @@ public class Q_YHZC extends AppCompatActivity {
                     return;
                 }
                 if (Mimazc.getText().toString().equals(Zmimazc.getText().toString())) {
-                    Q_YHZC_SQL sql = new Q_YHZC_SQL(Yhmzc.getText().toString(), Mimazc.getText().toString(), Yxzc.getText().toString());
+                    Q_YHZC_SQL sql = new Q_YHZC_SQL(Yhmzc.getText().toString(), Mimazc.getText().toString(), 1000,Yxzc.getText().toString());
                     sql.save();
                 } else {
                     Toast.makeText(this, "两次密码不一致", Toast.LENGTH_SHORT).show();
