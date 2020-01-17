@@ -36,6 +36,8 @@ public class Q_YPRY extends AppCompatActivity {
     private List<Q_YPRY_bean> list = new ArrayList<>();
     private Q_LV_adapter adapter;
     private List<Boolean> mCheckedList = new ArrayList<>();
+    private List<Integer> integers = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,19 +45,28 @@ public class Q_YPRY extends AppCompatActivity {
         ButterKnife.bind(this);
         list.add(new Q_YPRY_bean(R.drawable.sex, "张三", "2000-1-1", "大学", "无"));
         list.add(new Q_YPRY_bean(R.drawable.sex, "张三", "2000-1-1", "大学", "无"));
-        int x=list.size();
-        Zrstv.setText("应聘总人数:"+x+"人");
+        int x = list.size();
+        Zrstv.setText("应聘总人数:" + x + "人");
         for (int i = 0; i < list.size(); i++) {
             mCheckedList.add(false);
-            Log.i("cccccccccccc", "onCreate: "+mCheckedList.size());
+            Log.i("cccccccccccc", "onCreate: " + mCheckedList.size());
         }
         setAdapter();
-
     }
 
     private void setAdapter() {
         adapter = new Q_LV_adapter(this, list);
         lv1.setAdapter(adapter);
+        adapter.setClick(new Q_LV_adapter.Click() {
+            @Override
+            public void Click(int position, boolean is) {
+                if (is) {
+
+                } else {
+
+                }
+            }
+        });
     }
 
     @OnClick({R.id.iv_cd, R.id.bu_fx, R.id.bt_fs})
@@ -63,15 +74,16 @@ public class Q_YPRY extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.iv_cd:
                 //TODO: add click handling
-                if (adapter.isIs()){
-                    adapter.setIs(false);
-                    list.clear();
-                }else {
-                    adapter.setIs(true);
-                }
+
                 break;
             case R.id.bu_fx:
                 //TODO: add click handling
+                if (adapter.isIs()) {
+                    adapter.setIs(false);
+                } else {
+                    adapter.setIs(true);
+                }
+                adapter.notifyDataSetChanged();
                 break;
             case R.id.bt_fs:
                 //TODO: add click handling

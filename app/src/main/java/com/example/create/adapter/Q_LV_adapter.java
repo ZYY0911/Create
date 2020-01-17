@@ -48,12 +48,16 @@ public class Q_LV_adapter extends ArrayAdapter<Q_YPRY_bean> {
         TextView tv_xl = convertView.findViewById(R.id.tv_xl);
         TextView tv_csny = convertView.findViewById(R.id.tv_csny);
         TextView tv_gzjl = convertView.findViewById(R.id.tv_gzjl);
-        CheckBox cb_xz = convertView.findViewById(R.id.cb_xz);
+        final CheckBox cb_xz = convertView.findViewById(R.id.cb_xz);
         cb_xz.setChecked(is);
         cb_xz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                click.Click(position,false);
+                if (cb_xz.isChecked()) {
+                    click.Click(position,true);
+                }else {
+                    click.Click(position,false);
+                }
             }
         });
         Q_YPRY_bean bean=list.get(position);
