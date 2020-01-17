@@ -1,35 +1,21 @@
 package com.example.create.http;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
 import com.example.create.AppClient;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
 import fi.iki.elonen.NanoHTTPD;
-
 /**
  * Create by 张瀛煜 on 2020-01-16
  */
 public class Z_MyService extends NanoHTTPD {
     public static final int PORT = 3333;
     private AppClient appClient;
-
     public Z_MyService(int port, AppClient appClient) {
         super(3333);
         this.appClient = appClient;
     }
-
     @Override
     public Response serve(IHTTPSession session) {
         String uri = session.getUri();

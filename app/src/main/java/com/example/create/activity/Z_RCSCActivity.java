@@ -75,6 +75,8 @@ public class Z_RCSCActivity extends AppCompatActivity {
                     case R.id.third:
                         myClass = Z_FBZPGLActivity.class;
                         break;
+                    case R.id.five:
+                        break;
                 }
                 startActivity(new Intent(Z_RCSCActivity.this,myClass));
                 return true;

@@ -12,15 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.Q_ZHMM"></activity>
+        <activity android:name=".activity.Q_YPRY"></activity>
+        <activity android:name=".activity.Q_ZHMM" />
         <activity android:name=".activity.Q_YHZC" />
-        <activity android:name=".activity.Q_YHDR"></activity>
-        <activity android:name=".activity.Z_ZYActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".activity.Q_YHDR">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.Z_RCSCActivity">
 
@@ -37,7 +33,31 @@
         <activity android:name=".activity.Z_FBZPGLActivity">
 
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.Z_ZYActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.Z_FBZPSHActivity">
+
+        </activity>
+        <activity android:name=".activity.Z_FBZXFBActivity">
+
+        </activity>
+        <activity android:name=".activity.Z_FBZPJLActivity">
+
+        </activity>
+        <activity android:name=".activity.Z_ZPSCActivity">
+
+        </activity>
+        <activity android:name=".activity.Z_FSJLactiviy">
+
+        </activity>
+        <activity android:name=".MainActivity" >
+
+        </activity>
     </application>
 
 </manifest>

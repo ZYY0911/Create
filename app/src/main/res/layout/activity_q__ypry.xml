@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:text="人才市场——应聘人员"
+        android:textColor="#fff"
+        android:background="#5590C7"/>
+
+</LinearLayout>

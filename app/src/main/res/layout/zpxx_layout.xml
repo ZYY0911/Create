@@ -34,8 +34,17 @@
             android:src="@drawable/serach" />
     </RelativeLayout>
 
+    <ListView
+        android:layout_width="1000dp"
+        android:layout_height="match_parent"
+        android:id="@+id/myList">
+
+    </ListView>
+
    <android.support.v7.widget.RecyclerView
        android:layout_width="1000dp"
        android:id="@+id/recycle_view"
-       android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+       android:layout_height="wrap_content">
+
+   </android.support.v7.widget.RecyclerView>
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.create.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,7 @@ public class Z_FBZPGLActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fbzpgl_layout);
         ButterKnife.bind(this);
+        title.setText("招聘审核");
     }
 
     @OnClick({R.id.change, R.id.layout_fb, R.id.layout_sh, R.id.layout_ls})
@@ -43,10 +45,13 @@ public class Z_FBZPGLActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.layout_fb:
+                startActivity(new Intent(this,Z_FBZXFBActivity.class));
                 break;
             case R.id.layout_sh:
+                startActivity(new Intent(this,Z_FBZPSHActivity.class));
                 break;
             case R.id.layout_ls:
+                startActivity(new Intent(this,Z_FBZPJLActivity.class));
                 break;
         }
     }

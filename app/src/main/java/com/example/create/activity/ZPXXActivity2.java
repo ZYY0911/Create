@@ -1,5 +1,6 @@
 package com.example.create.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,7 @@ public class ZPXXActivity2 extends AppCompatActivity {
     @BindView(R.id.tv_dis)
     TextView tvDis;
     private List<String> list;
+    private Intent intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class ZPXXActivity2 extends AppCompatActivity {
     }
 
     private void initView() {
+        etInput.setText(getIntent().getStringExtra("Gs"));
         if (list == null) {
             list = new ArrayList<>();
         } else {
@@ -61,6 +64,7 @@ public class ZPXXActivity2 extends AppCompatActivity {
         list.add("按薪资查询");
         list.add("按发布时间查询");
         myList.setAdapter(new ZPXXListViewAdapter(this,R.layout.zpxx_list_item,list));
+        intent = new Intent();
     }
 
     @OnClick({R.id.change, R.id.image_find,R.id.tv_dis})
@@ -72,6 +76,9 @@ public class ZPXXActivity2 extends AppCompatActivity {
             case R.id.image_find:
                 break;
             case R.id.tv_dis:
+                intent.putExtra("lx",1);
+                setResult(RESULT_OK,intent);
+                finish();
                 break;
         }
     }

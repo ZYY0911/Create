@@ -8,8 +8,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.create.AppClient;
 import com.example.create.R;
+import com.example.create.bean.QYZP;
+import com.example.create.util.SimpData;
+
+import java.text.DecimalFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +54,7 @@ public class Z_FBZXFBActivity extends AppCompatActivity {
     EditText etGwyq;
     @BindView(R.id.bt_save)
     Button btSave;
+    private AppClient appClient;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +66,7 @@ public class Z_FBZXFBActivity extends AppCompatActivity {
 
     private void initView() {
         title.setText("发布招聘信息");
+        appClient = (AppClient) getApplication();
     }
 
     @OnClick({R.id.change, R.id.bt_save})
@@ -67,8 +76,40 @@ public class Z_FBZXFBActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.bt_save:
+                QYZP qyzp = new QYZP();
+                qyzp.setState(1);
+                qyzp.setQymc(etName.getText().toString());
+                qyzp.setSzd(etProvince.getText().toString());
+                qyzp.setGsdz(etAddress.getText().toString());
+                qyzp.setTel(etTel.getText().toString());
+                qyzp.setEmail(etEmail.getText().toString());
+                qyzp.setGw(etGw.getText().toString());
+                qyzp.setXz(etJg.getText().toString());
+                qyzp.setXlyq(etXl.getText().toString());
+                qyzp.setZyyq(etMajor.getText().toString());
+                qyzp.setGzjl(etGzjl.getText().toString());
+                qyzp.setGwyq(etGwyq.getText().toString());
+                qyzp.setUser(AppClient.getUser());
+                qyzp.setTime(SimpData.Simp("yyyy-MM-dd HH:mm",new Date()));
+                String [] infos = appClient.getID().split(",");
+                if (infos[0].equals(SimpData.Simp("d",new Date()))){
+                    setNum(qyzp);
+                }else {
+                    appClient.setID(SimpData.Simp("d",new Date())+",1");
+                    setNum(qyzp);
+                }
+                qyzp.save();
+                Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    private void setNum(QYZP qyzp){
+        String [] infos = appClient.getID().split(",");
+        int indes = Integer.parseInt(infos[1]);
+        String str = String.format("%04d", indes);
+        qyzp.setNum(SimpData.Simp("yyyyMMdd",new Date())+str);
+        appClient.setID(infos[0]+","+(indes+1));
     }
 }
 
