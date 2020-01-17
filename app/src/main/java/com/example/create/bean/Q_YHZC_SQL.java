@@ -4,8 +4,17 @@ package com.example.create.bean;
 import org.litepal.crud.LitePalSupport;
 
 public class Q_YHZC_SQL extends LitePalSupport {
+    private int id;
     private String yhm;
     private String mima;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getJine() {
         return jine;

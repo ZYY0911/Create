@@ -11,9 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.example.create.AppClient;
 import com.example.create.R;
+import com.example.create.bean.Q_YHZC_SQL;
 import com.example.create.http.Z_MyService;
 import com.example.create.net.VolleyLo;
 import com.example.create.net.VolleyTo;
@@ -21,10 +21,10 @@ import com.example.create.util.SimpData;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.litepal.LitePal;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.Random;
 
 
 /**
@@ -59,29 +59,15 @@ public class Z_ZYActivity extends AppCompatActivity {
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            if (msg.what==0){
-                Random random = new Random();
-                nowTime.setText(SimpData.Simp("HH:mm",new Date()));
-                /*int wd = random.nextInt(40);
-                int dl = random.nextInt(150);
-                int kt = random.nextInt(2);
-                switch (kt){
-                    case 0:
-                        carAir.setText("热风");
-                        break;
-                    case 1:
-                        carAir.setText("冷风");
-                        break;
-                }
-                outWd.setText(wd+"˚C");
-                inWd.setText((wd-5)+"˚C");
-                butteryIn.setText(dl+"kw/h");
-                butteryOut.setText((dl-44)+"kw/h");*/
-
+            if (msg.what == 0) {
+                nowTime.setText(SimpData.Simp("HH:mm", new Date()));
             }
             return false;
         }
     });
+    private TextView userId;
+    private TextView userName;
+    private TextView userMoney;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,12 +77,13 @@ public class Z_ZYActivity extends AppCompatActivity {
         initClick();
         initData();
         initVolley();
-        z_myService = new Z_MyService(3333,appClient);
+        z_myService = new Z_MyService(3333, appClient);
         try {
             z_myService.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     private void initVolley() {
@@ -110,10 +97,10 @@ public class Z_ZYActivity extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.optJSONArray("ROWS_DETAIL");
                         JSONObject jsonObject1 = jsonArray.optJSONObject(0);
                         carAir.setText(jsonObject1.optString("kt"));
-                        outWd.setText(jsonObject1.optString("intWd")+"˚C");
-                        inWd.setText(jsonObject1.optString("outWd")+"˚C");
-                        butteryIn.setText(jsonObject1.optString("butteryIn")+"kw/h");
-                        butteryOut.setText(jsonObject1.optString("butteryOut")+"kw/h");
+                        outWd.setText(jsonObject1.optString("intWd") + "˚C");
+                        inWd.setText(jsonObject1.optString("outWd") + "˚C");
+                        butteryIn.setText(jsonObject1.optString("butteryIn") + "kw/h");
+                        butteryOut.setText(jsonObject1.optString("butteryOut") + "kw/h");
                     }
 
                     @Override
@@ -126,7 +113,7 @@ public class Z_ZYActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (z_myService!=null){
+        if (z_myService != null) {
             z_myService.stop();
         }
     }
@@ -142,32 +129,36 @@ public class Z_ZYActivity extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                }while (isLoop);
+                } while (isLoop);
             }
         }).start();
+        userName.setText(AppClient.getName());
+        Q_YHZC_SQL q_yhzc_sql = LitePal.where("yhm=?",AppClient.getName()).find(Q_YHZC_SQL.class).get(0);
+        userId.setText(q_yhzc_sql.getId()+"");
+        userMoney.setText(q_yhzc_sql.getJine()+"元");
 
     }
 
     private void initClick() {
-        ImageBg(1,timg1);
-        ImageBg(2,timg2);
-        ImageBg(3,timg3);
-        ImageBg(4,timg4);
-        ImageBg(5,timg5);
+        ImageBg(1, timg1);
+        ImageBg(2, timg2);
+        ImageBg(3, timg3);
+        ImageBg(4, timg4);
+        ImageBg(5, timg5);
         layoutRcsc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Z_ZYActivity.this,Z_RCSCActivity.class));
+                startActivity(new Intent(Z_ZYActivity.this, Z_RCSCActivity.class));
             }
         });
 
     }
 
-    private void ImageBg(final int index, TextView textView){
+    private void ImageBg(final int index, TextView textView) {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (index){
+                switch (index) {
                     case 1:
                         bgImage.setBackgroundResource(R.drawable.timg4);
                         break;
@@ -210,5 +201,8 @@ public class Z_ZYActivity extends AppCompatActivity {
         timg3 = findViewById(R.id.timg3);
         timg4 = findViewById(R.id.timg4);
         timg5 = findViewById(R.id.timg5);
+        userId = findViewById(R.id.userId);
+        userName = findViewById(R.id.user_name);
+        userMoney = findViewById(R.id.user_money);
     }
 }

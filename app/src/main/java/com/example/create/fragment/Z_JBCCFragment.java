@@ -80,6 +80,7 @@ public class Z_JBCCFragment extends Fragment {
         initView();
         initData();
         initClick();
+        etName.setText(AppClient.getName());
     }
 
     private void initClick() {

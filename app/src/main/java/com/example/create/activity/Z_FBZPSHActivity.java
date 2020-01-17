@@ -53,8 +53,10 @@ public class Z_FBZPSHActivity extends AppCompatActivity {
     }
 
     private void initData() {
+        if (qyzps==null) qyzps = new ArrayList<>();
+        else qyzps.clear();
         qyzps = LitePal.findAll(QYZP.class);
-        for (int i = 0; i < qyzps.size(); i++) {
+        for (int i = qyzps.size()-1; i >=0; i--) {
             if (qyzps.get(i).getState() != 1) {
                 qyzps.remove(i);
             }
@@ -106,6 +108,7 @@ public class Z_FBZPSHActivity extends AppCompatActivity {
                     integers.clear();
                 }else {
                     adapter.setIs(true);
+                    integers.clear();
                     for (int i = 0; i < qyzps.size(); i++) {
                         integers.add(qyzps.get(i).getId());
                     }

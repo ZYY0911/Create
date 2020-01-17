@@ -54,6 +54,7 @@ public class Z_JLLBFragment extends Fragment {
         initView();
         initClick();
         initData();
+
     }
 
     private void initData() {

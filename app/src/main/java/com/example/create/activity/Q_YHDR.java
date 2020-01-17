@@ -90,7 +90,10 @@ public class Q_YHDR extends AppCompatActivity {
                 }
                 editor.apply();
                 AppClient.addUser(account);
+                AppClient.setName(account);
                 Toast.makeText(this, "登入成功", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Q_YHDR.this,Z_ZYActivity.class));
+                finish();
                 return;
             }
         }

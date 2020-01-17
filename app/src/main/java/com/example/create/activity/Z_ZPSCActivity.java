@@ -34,10 +34,10 @@ public class Z_ZPSCActivity extends AppCompatActivity {
     TextView title;
     @BindView(R.id.recycle_view)
     RecyclerView recycleView;
-    private List<QYZP> qyzps,qyzps1;
+    private List<QYZP> qyzps, qyzps1;
     private GridLayoutManager gridLayoutManager;
     private ZPXXAdapter adapter;
-    private List<String> list,list1;
+    private List<String> list, list1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,28 +51,30 @@ public class Z_ZPSCActivity extends AppCompatActivity {
     private void initData() {
         qyzps = LitePal.findAll(QYZP.class);
         qyzps1 = new ArrayList<>();
-        list= new ArrayList<>();
-        list1= new ArrayList<>();
+        list = new ArrayList<>();
+        list1 = new ArrayList<>();
         Collections.sort(qyzps, new Comparator<QYZP>() {
             @Override
             public int compare(QYZP o1, QYZP o2) {
                 return o2.getTime().compareTo(o1.getTime());
             }
         });
-        String arr[] = AppClient.getJlSc().split(",");
-        for (int i = 0; i < arr.length; i++) {
-            list.add(arr[i].split("/")[1]);
-            list1.add(arr[i].split("/")[0]);
-        }
-        for (int i = 0; i < qyzps.size(); i++) {
-            for (int j = 0; j < list1.size(); j++) {
-                if (qyzps.get(i).getId()==Integer.parseInt(list1.get(j))){
-                    qyzps1.add(qyzps.get(i));
+        if (!"".equals(AppClient.getJlSc())) {
+            String arr[] = AppClient.getJlSc().split(",");
+            for (int i = 0; i < arr.length; i++) {
+                list.add(arr[i].split("/")[1]);
+                list1.add(arr[i].split("/")[0]);
+            }
+            for (int i = 0; i < qyzps.size(); i++) {
+                for (int j = 0; j < list1.size(); j++) {
+                    if (qyzps.get(i).getId() == Integer.parseInt(list1.get(j))) {
+                        qyzps1.add(qyzps.get(i));
+                    }
                 }
             }
+            adapter = new ZPXXAdapter(qyzps1, list);
+            recycleView.setAdapter(adapter);
         }
-        adapter = new ZPXXAdapter(qyzps1,list);
-        recycleView.setAdapter(adapter);
     }
 
     private void initView() {
