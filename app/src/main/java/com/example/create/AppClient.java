@@ -15,16 +15,16 @@ import org.litepal.LitePal;
  * Create by 张瀛煜 on 2020-01-15
  */
 public class AppClient extends Application {
-    private String name = "zhangsan";
+    private static String name = "zhangsan";
     private static SharedPreferences preferences;
     private static RequestQueue requestQueue;
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public static void setName(String name) {
+        AppClient.name = name;
     }
 
     @Override
@@ -38,6 +38,25 @@ public class AppClient extends Application {
     public static void add(JsonObjectRequest jsonObjectRequest) {
         requestQueue.add(jsonObjectRequest);
     }
+
+
+    public static void setJlSc(String jlSc){
+        preferences.edit().putString("JlSc",jlSc).apply();
+    }
+
+    public static String getJlSc(){
+        return preferences.getString("JlSc","");
+    }
+
+    public String  getID(){
+        return preferences.getString("Num","13,1");
+    }
+
+    public void setID(String id){
+        preferences.edit().putString("Num",id).apply();
+    }
+
+
 
     public String getKt() {
         return preferences.getString("Kt", "热风");

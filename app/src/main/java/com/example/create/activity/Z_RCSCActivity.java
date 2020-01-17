@@ -70,6 +70,12 @@ public class Z_RCSCActivity extends AppCompatActivity {
                         myClass = Z_WDJLActivity.class;
                         break;
                     case R.id.second:
+                        myClass = Z_ZPXXActivity.class;
+                        break;
+                    case R.id.third:
+                        myClass = Z_FBZPGLActivity.class;
+                        break;
+                    case R.id.five:
                         break;
                 }
                 startActivity(new Intent(Z_RCSCActivity.this,myClass));
