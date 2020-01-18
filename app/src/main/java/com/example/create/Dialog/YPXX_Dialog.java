@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import com.example.create.R;
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class YPXX_Dialog extends DialogFragment {
     private View view;
@@ -35,7 +35,7 @@ public class YPXX_Dialog extends DialogFragment {
         bt_qd = view.findViewById(R.id.bt_qd);
         bt_qx = view.findViewById(R.id.bt_qx);
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+     //   getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         return view;
     }
 
@@ -47,15 +47,9 @@ public class YPXX_Dialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 if (ck_tz.isChecked()) {
-                    NotificationManager manager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
-                    Notification notification = new NotificationCompat.Builder(getContext())
-                            .setContentTitle("This is content")
-                            .setContentText("123123")
-                            .setWhen(System.currentTimeMillis())
-                            .setSmallIcon(R.mipmap.ic_launcher)
-                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
-                            .build();
-                    manager.notify(1, notification);
+                    Log.i("111111111111", "onClick: ");
+                    TZ_Dialog tz_dialog=new TZ_Dialog();
+                    tz_dialog.show(getFragmentManager(),"");
                 }
                 if (ck_dx.isChecked()) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -79,7 +73,8 @@ public class YPXX_Dialog extends DialogFragment {
         bt_qx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dismiss();
+        dismiss();
+
             }
         });
     }

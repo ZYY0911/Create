@@ -8,6 +8,7 @@
         <mapping class="com.example.create.bean.Q_YHZC_SQL" />
         <mapping class="com.example.create.bean.QYZP"/>
         <mapping class="com.example.create.bean.JLFS"/>
+        <mapping class="com.example.create.bean.TZ_SQL"/>
     </list>
 
 </litepal>
