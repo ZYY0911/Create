@@ -58,8 +58,6 @@ public class Z_ZPXXActivity extends AppCompatActivity {
     ImageView imageFind;
     @BindView(R.id.myList)
     ListView myList;
-    private List<QYZP> qyzps;
-    private ZPXXListAdapter zpxxListAdapter;
     private String[] sc;
 
     @Override
@@ -77,7 +75,7 @@ public class Z_ZPXXActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        qyzps = LitePal.findAll(QYZP.class);
+        final List<QYZP> qyzps =  LitePal.where("state=?","2").find(QYZP.class);
         Collections.sort(qyzps, new Comparator<QYZP>() {
             @Override
             public int compare(QYZP o1, QYZP o2) {
@@ -92,7 +90,51 @@ public class Z_ZPXXActivity extends AppCompatActivity {
                 list.add(Integer.valueOf(sc[i].split("/")[0]));
             }
         }
-        zpxxListAdapter = new ZPXXListAdapter(this, R.layout.zpxx_item, qyzps, list);
+        final ZPXXListAdapter zpxxListAdapter = new ZPXXListAdapter(this, R.layout.zpxx_item, qyzps, list);
+        myList.setAdapter(zpxxListAdapter);
+        zpxxListAdapter.SetData(new ZPXXListAdapter.SetData() {
+            @Override
+            public void setdata(int position, int lx, boolean sc) {
+                QYZP qyzp = qyzps.get(position);
+                if (lx == 1) {
+                    zpxxListAdapter.setIndex(position);
+                } else if (lx == 2) {
+                    String arr = AppClient.getJlSc();
+                    if (arr.equals("")) {
+                        arr += qyzp.getId() + "/" + SimpData.Simp("yyyy-MM-dd HH:mm", new Date());
+                    } else {
+                        arr += "," + qyzp.getId() + "/" + SimpData.Simp("yyyy-MM-dd HH:mm", new Date());
+                    }
+                    Log.i("sss", "setdata: " + arr);
+                    AppClient.setJlSc(arr);
+                    list.add(qyzp.getId());
+                } else if (lx == 3) {
+                    Z_JLDialog dialog = new Z_JLDialog(qyzp.getId());
+                    dialog.show(getSupportFragmentManager(), "aaa");
+
+                }
+                zpxxListAdapter.notifyDataSetChanged();
+            }
+        });
+
+    }
+
+    private void initData2(final List<QYZP> qyzps) {
+        Collections.sort(qyzps, new Comparator<QYZP>() {
+            @Override
+            public int compare(QYZP o1, QYZP o2) {
+                return o2.getTime().compareTo(o1.getTime());
+            }
+        });
+        final String jl = AppClient.getJlSc();
+        final List<Integer> list = new ArrayList<>();
+        if (!"".equals(jl)) {
+            sc = jl.split(",");
+            for (int i = 0; i < sc.length; i++) {
+                list.add(Integer.valueOf(sc[i].split("/")[0]));
+            }
+        }
+        final ZPXXListAdapter zpxxListAdapter = new ZPXXListAdapter(this, R.layout.zpxx_item, qyzps, list);
         myList.setAdapter(zpxxListAdapter);
         zpxxListAdapter.SetData(new ZPXXListAdapter.SetData() {
             @Override
@@ -144,7 +186,41 @@ public class Z_ZPXXActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     switch (data.getIntExtra("lx", 1)) {
                         case 1:
+                            initData();
+                            break;
+                        case 2:
+                            String fs = data.getStringExtra("fs");
+                            String tj = data.getStringExtra("tj");
+                            switch (fs) {
+                                case "全部招聘信息":
+                                    initData();
+                                    break;
+                                case "按公司名称查询":
+                                    initData2(LitePal.where("qymc=? and state=? ",etInput.getText().toString().trim(),"2").find(QYZP.class));
+                                    break;
+                                case "按行业查询":
+                                    initData2(LitePal.where("hylx=? and state=? ",tj,"2").find(QYZP.class));
+                                    break;
+                                case "按岗位查询":
+                                    initData2(LitePal.where("gw=? and state=? ",tj,"2").find(QYZP.class));
+                                    break;
+                                case "按专业查询":
+                                    initData2(LitePal.where("zyyq=? and state=? ",tj,"2").find(QYZP.class));
+                                    break;
+                                case "按所在地查询":
+                                    initData2(LitePal.where("szd=? and state=? ",tj,"2").find(QYZP.class));
+                                    break;
+                                case "按学历查询":
+                                    initData2(LitePal.where("xlyq=? and state=? ",tj,"2").find(QYZP.class));
+                                    break;
+                                case "按薪资查询":
+                                    initData2(LitePal.where("xz>? and state=? ",tj,"2").find(QYZP.class));
+                                    break;
+                                case "按发布时间查询":
+                                    initData2(LitePal.where("time<? and state=? ",tj,"2").find(QYZP.class));
+                                    break;
 
+                            }
                             break;
                     }
 

@@ -46,7 +46,7 @@ public class Z_RCSCActivity extends AppCompatActivity {
     private void initData() {
         if (jbxx != null) jbxx.clear();
         jbxx = LitePal.where("name=?", String.valueOf(appClient.getName())).find(JBXX.class);
-        if (jbxx.size()>0){
+        if (jbxx.size() > 0) {
             imageUrl = jbxx.get(0).getPhoto();
         }
     }
@@ -59,13 +59,15 @@ public class Z_RCSCActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
                 ImageView icon_photo = navView.findViewById(R.id.icon_photo);
                 Glide.with(Z_RCSCActivity.this).load(imageUrl).into(icon_photo);
+                TextView msg = navView.findViewById(R.id.msg);
+                msg.setText("9");
             }
         });
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Class myClass = null;
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.first:
                         myClass = Z_WDJLActivity.class;
                         break;
@@ -78,8 +80,13 @@ public class Z_RCSCActivity extends AppCompatActivity {
                     case R.id.forth:
                         myClass = Q_YPRY.class;
                         break;
+                    case R.id.five:
+                        myClass = Z_XXTAActivity.class;
+                        break;
+                    case R.id.six:
+                        break;
                 }
-                startActivity(new Intent(Z_RCSCActivity.this,myClass));
+                startActivity(new Intent(Z_RCSCActivity.this, myClass));
                 return true;
             }
         });

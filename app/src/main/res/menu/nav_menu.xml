@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="single"
         android:id="@+id/grout_1">
 
@@ -16,6 +17,7 @@
             android:id="@+id/forth"
             android:title="应聘人员列表"/>
         <item
+            app:actionLayout="@layout/badge"
             android:id="@+id/five"
             android:title="查看通知"/>
         <item

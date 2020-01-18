@@ -7,7 +7,7 @@ import org.litepal.crud.LitePalSupport;
  */
 public class JBXX extends LitePalSupport {
     private int id;
-    private String name,sex,major,school,xl,gzjl,jyyx,jx,yx,tel,birth,photo,province;
+    private String name,sex,major,school,xl,gzjl,jyyx,jx,yx,tel,birth,photo,province,love;
 
     public JBXX() {
     }
@@ -18,6 +18,14 @@ public class JBXX extends LitePalSupport {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getLove() {
+        return love;
+    }
+
+    public void setLove(String love) {
+        this.love = love;
     }
 
     public String getName() {

@@ -5,9 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,10 +18,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.bumptech.glide.Glide;
 import com.example.create.AppClient;
-import com.example.create.MainActivity;
 import com.example.create.R;
 import com.example.create.activity.Z_WDJLActivity;
 import com.example.create.bean.JBXX;
@@ -32,10 +29,7 @@ import com.example.create.util.ShowDialog;
 
 import org.litepal.LitePal;
 
-import java.io.FileNotFoundException;
 import java.util.List;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * Create by 张瀛煜 on 2020-01-15
@@ -52,7 +46,7 @@ public class Z_JBCCFragment extends Fragment {
     private EditText etBirth;
     private EditText etMajor;
     private EditText etSchool;
-    private EditText etXl;
+    private Spinner etXl;
     private EditText etGzjl;
     private EditText etJyyx;
     private EditText etJx;
@@ -62,8 +56,9 @@ public class Z_JBCCFragment extends Fragment {
     private List<JBXX> jbxx;
     private Context context;
     public String imageUrl;
+    private EditText etLove;
 
-    public Z_JBCCFragment(Context context){
+    public Z_JBCCFragment(Context context) {
         this.context = context;
     }
 
@@ -109,10 +104,11 @@ public class Z_JBCCFragment extends Fragment {
                 jbxx1.setProvince(etProvince.getText().toString().trim());
                 jbxx1.setSchool(etSchool.getText().toString().trim());
                 jbxx1.setSex(etSex.getText().toString().trim());
-                jbxx1.setXl(etXl.getText().toString().trim());
+                jbxx1.setXl(etXl.getSelectedItem().toString());
                 jbxx1.setTel(etTel.getText().toString().trim());
                 jbxx1.setYx(etYx.getText().toString().trim());
-                Log.i("aaa", "onClick: "+imageUrl);
+                jbxx1.setLove(etLove.getText().toString().trim());
+                Log.i("aaa", "onClick: " + imageUrl);
                 jbxx1.setPhoto(imageUrl);
                 if (jbxx.size() == 0) {
                     jbxx1.setName(etName.getText().toString().trim());
@@ -140,6 +136,7 @@ public class Z_JBCCFragment extends Fragment {
         });
 
     }
+
     private void openAlbum() {
         Intent intent = new Intent("android.intent.action.GET_CONTENT");
         intent.setType("image/*");
@@ -160,12 +157,29 @@ public class Z_JBCCFragment extends Fragment {
             etProvince.setText(jbxx1.getProvince());
             etSchool.setText(jbxx1.getSchool());
             etSex.setText(jbxx1.getSex());
-            etXl.setText(jbxx1.getXl());
+            etXl.setSelection(getSelect(jbxx1.getXl()));
             etTel.setText(jbxx1.getTel());
             etYx.setText(jbxx1.getYx());
+            etLove.setText(jbxx1.getLove());
             Glide.with(getView()).load(jbxx1.getPhoto()).into(imagePhoto);
             setEnable(false);
         }
+    }
+
+    private int getSelect(String index) {
+        switch (index) {
+            case "博士":
+                return 0;
+            case "硕士":
+                return 1;
+            case "本科":
+                return 2;
+            case "专科":
+                return 3;
+            case "专科以下":
+                return 4;
+        }
+        return 0;
     }
 
     private void setEnable(boolean is) {
@@ -208,6 +222,7 @@ public class Z_JBCCFragment extends Fragment {
         etJx = getView().findViewById(R.id.et_jx);
         etYx = getView().findViewById(R.id.et_yx);
         btSave = getView().findViewById(R.id.bt_save);
+        etLove = getView().findViewById(R.id.et_love);
     }
 }
 

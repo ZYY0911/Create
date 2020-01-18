@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.create.R;
 import com.example.create.adapter.ZPXXListViewAdapter;
@@ -38,6 +41,7 @@ public class ZPXXActivity2 extends AppCompatActivity {
     TextView tvDis;
     private List<String> list;
     private Intent intent;
+    private String seleect;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +52,6 @@ public class ZPXXActivity2 extends AppCompatActivity {
     }
 
     private void initView() {
-        etInput.setText(getIntent().getStringExtra("Gs"));
         if (list == null) {
             list = new ArrayList<>();
         } else {
@@ -63,11 +66,25 @@ public class ZPXXActivity2 extends AppCompatActivity {
         list.add("按学历查询");
         list.add("按薪资查询");
         list.add("按发布时间查询");
-        myList.setAdapter(new ZPXXListViewAdapter(this,R.layout.zpxx_list_item,list));
+        myList.setAdapter(new ZPXXListViewAdapter(this, R.layout.zpxx_list_item, list));
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("tttt", "onItemClick: ");
+                seleect = list.get(position);
+                Toast.makeText(ZPXXActivity2.this, "将按照" + seleect + "进行查询", Toast.LENGTH_SHORT).show();
+                intent.putExtra("lx", 2);
+                intent.putExtra("fs", seleect);
+                intent.putExtra("tj",etInput.getText().toString().trim());
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+
+        });
         intent = new Intent();
     }
 
-    @OnClick({R.id.change, R.id.image_find,R.id.tv_dis})
+    @OnClick({R.id.change, R.id.image_find, R.id.tv_dis})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.change:
@@ -76,8 +93,8 @@ public class ZPXXActivity2 extends AppCompatActivity {
             case R.id.image_find:
                 break;
             case R.id.tv_dis:
-                intent.putExtra("lx",1);
-                setResult(RESULT_OK,intent);
+                intent.putExtra("lx", 1);
+                setResult(RESULT_OK, intent);
                 finish();
                 break;
         }
