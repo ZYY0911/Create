@@ -14,15 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.Q_YPRY"></activity>
-        <activity android:name=".activity.Q_ZHMM" />
-        <activity android:name=".activity.Q_YHZC" />
-        <activity android:name=".activity.Q_YHDR">
+        <activity android:name=".activity.Q_YPRY">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.Q_ZHMM" />
+        <activity android:name=".activity.Q_YHZC" />
+        <activity android:name=".activity.Q_YHDR">
+
 
         </activity>
         <activity android:name=".activity.Z_RCSCActivity">

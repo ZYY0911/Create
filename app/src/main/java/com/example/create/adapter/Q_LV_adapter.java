@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.create.R;
@@ -16,7 +17,6 @@ import java.util.List;
 
 public class Q_LV_adapter extends ArrayAdapter<Q_YPRY_bean> {
     private List<Q_YPRY_bean> list;
-    private List<Boolean> mCheckedList;
 
     private boolean is=false;
     public void setIs(boolean is) {
@@ -40,6 +40,18 @@ public class Q_LV_adapter extends ArrayAdapter<Q_YPRY_bean> {
 
     private Click click;
 
+
+
+    public interface  onClick{
+        void  onClick(int position);
+    }
+
+    public void setOnClick(Q_LV_adapter.onClick onClick) {
+        this.onClick = onClick;
+    }
+
+    private onClick onClick;
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(getContext()).inflate(R.layout.lv_item, null);
@@ -48,6 +60,7 @@ public class Q_LV_adapter extends ArrayAdapter<Q_YPRY_bean> {
         TextView tv_xl = convertView.findViewById(R.id.tv_xl);
         TextView tv_csny = convertView.findViewById(R.id.tv_csny);
         TextView tv_gzjl = convertView.findViewById(R.id.tv_gzjl);
+        LinearLayout layout=convertView.findViewById(R.id.layout);
         final CheckBox cb_xz = convertView.findViewById(R.id.cb_xz);
         cb_xz.setChecked(is);
         cb_xz.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +73,14 @@ public class Q_LV_adapter extends ArrayAdapter<Q_YPRY_bean> {
                 }
             }
         });
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClick.onClick(position);
+            }
+        });
+
         Q_YPRY_bean bean=list.get(position);
         iv_tx.setBackgroundResource(bean.getPhoto());
         tv_xm.setText(bean.getXm());

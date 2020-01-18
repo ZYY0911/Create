@@ -1,18 +1,24 @@
 package com.example.create.dialog;
-
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
-
 import com.example.create.R;
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class YPXX_Dialog extends DialogFragment {
     private View view;
@@ -28,25 +34,46 @@ public class YPXX_Dialog extends DialogFragment {
         ck_dh = view.findViewById(R.id.ck_dh);
         bt_qd = view.findViewById(R.id.bt_qd);
         bt_qx = view.findViewById(R.id.bt_qx);
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         bt_qd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ck_tz.isChecked()){
-
+                if (ck_tz.isChecked()) {
+                    NotificationManager manager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+                    Notification notification = new NotificationCompat.Builder(getContext())
+                            .setContentTitle("This is content")
+                            .setContentText("123123")
+                            .setWhen(System.currentTimeMillis())
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                            .build();
+                    manager.notify(1, notification);
                 }
-                if (ck_dx.isChecked()){
+                if (ck_dx.isChecked()) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.putExtra("address", "186...");
                     intent.putExtra("sms_body", "短信内容");
                     intent.setType("vnd.android-dir/mms-sms");
                     startActivity(intent);
                 }
+                if (ck_dx.isChecked()&&ck_tz.isChecked()){
+                    ck_dh.setChecked(false);
+                }else {
+                    if (ck_dh.isChecked()){
+                        Intent intent = new Intent(Intent.ACTION_DIAL,Uri.parse("tel:" + "4000788400"));
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                }
+                dismiss();
             }
         });
         bt_qx.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +83,6 @@ public class YPXX_Dialog extends DialogFragment {
             }
         });
     }
-
 
 
 }

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.create.R;
 import com.example.create.adapter.Q_LV_adapter;
 import com.example.create.bean.Q_YPRY_bean;
+import com.example.create.dialog.JL_dailog;
 import com.example.create.dialog.YPXX_Dialog;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class Q_YPRY extends AppCompatActivity {
     private List<Boolean> mCheckedList = new ArrayList<>();
     private List<Integer> integers = new ArrayList<>();
     private YPXX_Dialog dialog;
+    private JL_dailog dailog1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,17 @@ public class Q_YPRY extends AppCompatActivity {
     private void setAdapter() {
         adapter = new Q_LV_adapter(this, list);
         lv1.setAdapter(adapter);
+        adapter.setOnClick(new Q_LV_adapter.onClick() {
+            @Override
+            public void onClick(int position) {
+                if (position==0){
+                    dailog1=new JL_dailog();
+                    dailog1.show(getSupportFragmentManager(),"");
+                }
+            }
+        });
+
+
         adapter.setClick(new Q_LV_adapter.Click() {
             @Override
             public void Click(int position, boolean is) {
