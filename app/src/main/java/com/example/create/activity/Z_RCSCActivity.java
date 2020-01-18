@@ -78,7 +78,7 @@ public class Z_RCSCActivity extends AppCompatActivity {
                         myClass = Z_FBZPGLActivity.class;
                         break;
                     case R.id.forth:
-                        myClass = Q_YPRY.class;
+                        myClass = Z_YPRYLBActivity.class;
                         break;
                     case R.id.five:
                         myClass = Z_XXTAActivity.class;

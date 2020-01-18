@@ -1,5 +1,6 @@
 package com.example.create.dialog;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+@SuppressLint("ValidFragment")
 public class JL_dailog extends DialogFragment {
     @BindView(R.id.tv_xm)
     TextView Xmtv;
@@ -55,6 +57,11 @@ public class JL_dailog extends DialogFragment {
     Button Xzbt;
     private View view;
     private Unbinder mUnbinder;
+    private JBXX jbxx;
+
+    public JL_dailog(JBXX jbxx) {
+        this.jbxx = jbxx;
+    }
 
     @Nullable
     @Override
@@ -71,22 +78,19 @@ public class JL_dailog extends DialogFragment {
     }
 
     private void setSQL() {
-        List<JBXX> list = LitePal.findAll(JBXX.class);
-        for (JBXX jbxx:list){
-            Xmtv.setText(jbxx.getName());
-            Xbtv.setText(jbxx.getSex());
-            Zytv.setText(jbxx.getMajor());
-            Byyxtv.setText(jbxx.getSchool());
-            Xltv.setText(jbxx.getXl());
-            Gzjltv.setText(jbxx.getGzjl());
-            Csnytv.setText(jbxx.getBirth());
-            Hjtv.setText(jbxx.getJx());
-            Yjtv.setText(jbxx.getYx());
-            Dhtv.setText(jbxx.getTel());
-            Glide.with(this).load(jbxx.getPhoto()).into(Txiv);
-            Tcahtv.setText("篮球");
-            Jgtv.setText(jbxx.getProvince());
-        }
+        Xmtv.setText(jbxx.getName());
+        Xbtv.setText(jbxx.getSex());
+        Zytv.setText(jbxx.getMajor());
+        Byyxtv.setText(jbxx.getSchool());
+        Xltv.setText(jbxx.getXl());
+        Gzjltv.setText(jbxx.getGzjl());
+        Csnytv.setText(jbxx.getBirth());
+        Hjtv.setText(jbxx.getJx());
+        Yjtv.setText(jbxx.getYx());
+        Dhtv.setText(jbxx.getTel());
+        Glide.with(this).load(jbxx.getPhoto()).into(Txiv);
+        Tcahtv.setText("篮球");
+        Jgtv.setText(jbxx.getProvince());
     }
 
     @Override
