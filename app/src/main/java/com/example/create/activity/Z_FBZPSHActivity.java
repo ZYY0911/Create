@@ -83,7 +83,7 @@ public class Z_FBZPSHActivity extends AppCompatActivity {
 
     private void initView() {
         integers = new ArrayList<>();
-        title.setText("招聘审核");
+        title.setText("人才市场--招聘审核");
 
     }
 

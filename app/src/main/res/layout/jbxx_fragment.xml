@@ -63,10 +63,10 @@
                         app:errorTextAppearance="@style/TextAppearance.Design.Error">
 
                         <EditText
-                            android:enabled="false"
                             android:id="@+id/et_name"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:enabled="false"
                             android:hint="姓名"
                             android:singleLine="true"
                             android:textSize="30sp" />
@@ -243,7 +243,25 @@
                         android:id="@+id/et_gzjl"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="工作经历"
+                        android:hint="工作经历(年)"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textSize="30sp" />
+
+
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+                    <EditText
+                        android:id="@+id/et_love"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="爱好"
+                        android:inputType="number"
                         android:singleLine="true"
                         android:textSize="30sp" />
 
@@ -267,13 +285,12 @@
                     android:layout_weight="1"
                     app:errorTextAppearance="@style/TextAppearance.Design.Error">
 
-                    <EditText
+
+                    <Spinner
                         android:id="@+id/et_xl"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="学历"
-                        android:singleLine="true"
-                        android:textSize="30sp" />
+                        android:entries="@array/xl"></Spinner>
 
 
                 </android.support.design.widget.TextInputLayout>

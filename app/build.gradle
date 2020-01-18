@@ -41,5 +41,6 @@ dependencies {
     debugImplementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
     implementation files('libs/volley.jar')
     implementation'org.nanohttpd:nanohttpd:2.2.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
 }

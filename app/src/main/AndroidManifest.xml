@@ -59,6 +59,12 @@
         <activity android:name=".activity.Z_FSJLactiviy">
 
         </activity>
+        <activity android:name=".activity.Z_TBXXActivity">
+
+        </activity>
+        <activity android:name=".activity.Z_XXTAActivity">
+
+        </activity>
         <activity android:name=".MainActivity">
 
         </activity>

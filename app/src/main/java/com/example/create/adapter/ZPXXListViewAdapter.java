@@ -33,12 +33,6 @@ public class ZPXXListViewAdapter extends ArrayAdapter<String> {
         LinearLayout itemLayout = view.findViewById(R.id.item_layout);
         TextView itemName = view.findViewById(R.id.item_name);
         itemName.setText(getItem(position));
-        itemLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         return view;
     }
 }
