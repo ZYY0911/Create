@@ -1,12 +1,16 @@
 package com.example.create.http;
 
+import android.app.Notification;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.example.create.AppClient;
 import com.example.create.bean.JBXX;
 import com.example.create.bean.JLFS;
 import com.example.create.bean.JLLB;
 import com.example.create.bean.QYZP;
+import com.example.create.bean.Q_YHZC_SQL;
+import com.example.create.bean.TZ_SQL;
 import com.example.create.util.SimpData;
 
 import org.json.JSONArray;
@@ -174,7 +178,7 @@ public class Z_MyService extends NanoHTTPD {
                         return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
                     }
                 case "/get_zp_infos":
-                    List<QYZP> qyzps =  LitePal.where("state=?","2").find(QYZP.class);
+                    List<QYZP> qyzps = LitePal.where("state=?", "2").find(QYZP.class);
                     JSONArray jsonArray1 = new JSONArray();
                     for (int i = 0; i < qyzps.size(); i++) {
                         QYZP qyzp = qyzps.get(i);
@@ -267,7 +271,7 @@ public class Z_MyService extends NanoHTTPD {
                         return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
                     }
                 case "/get_zp_history":
-                    List<QYZP> qyzps1 = LitePal.where("state=?","2").find(QYZP.class);
+                    List<QYZP> qyzps1 = LitePal.where("state=?", "2").find(QYZP.class);
                     JSONArray jsonArray2 = new JSONArray();
                     for (int i = 0; i < qyzps1.size(); i++) {
                         QYZP qyzp = qyzps1.get(i);
@@ -282,13 +286,47 @@ public class Z_MyService extends NanoHTTPD {
                         jsonObject3.put("email", qyzp.getEmail());
                         jsonObject3.put("tel", qyzp.getTel());
                         jsonObject3.put("time", qyzp.getTime());
-                        jsonObject3.put("shTime",qyzp.getShtime());
+                        jsonObject3.put("shTime", qyzp.getShtime());
                         jsonArray2.put(jsonObject3);
                     }
                     JSONObject jsonObject3 = new JSONObject();
                     jsonObject3.put("RESULT", "S");
                     jsonObject3.put("ROWS_DETAIL", jsonArray2);
                     return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, jsonObject3.toString());
+                case "/log_in":
+                    file = session.getParms();
+                    List<Q_YHZC_SQL> q_yhzc_sqls = LitePal.where("yhm=? and mima=?", file.get("UserName"), file.get("password")).find(Q_YHZC_SQL.class);
+                    if (q_yhzc_sqls.size() != 0) {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                    } else {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
+                case "/get_notifi_info":
+                    List<TZ_SQL> tz_sqls = LitePal.where("is=?", "1").find(TZ_SQL.class);
+                    JSONArray jsonArray3 = new JSONArray();
+                    for (int i = 0; i < tz_sqls.size(); i++) {
+                        TZ_SQL tz_sql = tz_sqls.get(i);
+                        JSONObject jsonObject21 = new JSONObject();
+                        jsonObject21.put("id", tz_sql.getId());
+                        jsonObject21.put("nr", tz_sql.getNeirong());
+                        jsonObject21.put("time", tz_sql.getTime());
+                        jsonArray3.put(jsonObject21);
+                    }
+                    JSONObject jsonObject4 = new JSONObject();
+                    jsonObject4.put("RESULT", "S");
+                    jsonObject4.put("ROWS_DETAIL", jsonArray3);
+                    return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, jsonObject4.toString());
+                case "/request_notif_info":
+                    file = session.getParms();
+                    if (file.size() == 2) {
+                        TZ_SQL tz_sql = new TZ_SQL();
+                        tz_sql.setIs(2);
+                        tz_sql.setRequestInfo(file.get("request"));
+                        tz_sql.updateAll("id=?", file.get("id"));
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                    } else {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
 
             }
         } catch (JSONException e) {

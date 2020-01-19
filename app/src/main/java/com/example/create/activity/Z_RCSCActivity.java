@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.create.AppClient;
 import com.example.create.R;
 import com.example.create.bean.JBXX;
+import com.example.create.bean.TZ_SQL;
 
 import org.litepal.LitePal;
 
@@ -60,7 +61,13 @@ public class Z_RCSCActivity extends AppCompatActivity {
                 ImageView icon_photo = navView.findViewById(R.id.icon_photo);
                 Glide.with(Z_RCSCActivity.this).load(imageUrl).into(icon_photo);
                 TextView msg = navView.findViewById(R.id.msg);
-                msg.setText("9");
+                List<TZ_SQL> tz_sqls = LitePal.where("is=?","1").find(TZ_SQL.class);
+                if (tz_sqls.size()==0){
+                    msg.setVisibility(View.GONE);
+                }else {
+                    msg.setVisibility(View.VISIBLE);
+                    msg.setText(tz_sqls.size()+"");
+                }
             }
         });
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -86,6 +93,7 @@ public class Z_RCSCActivity extends AppCompatActivity {
                     case R.id.six:
                         break;
                 }
+                drawerLayout.closeDrawers();
                 startActivity(new Intent(Z_RCSCActivity.this, myClass));
                 return true;
             }

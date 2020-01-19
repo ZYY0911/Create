@@ -3,8 +3,24 @@ package com.example.create.bean;
 import org.litepal.crud.LitePalSupport;
 
 public class TZ_SQL extends LitePalSupport {
-    private int is;
-    private String neirong,time;
+    private int id,is;
+    private String neirong,time,requestInfo;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getRequestInfo() {
+        return requestInfo;
+    }
+
+    public void setRequestInfo(String requestInfo) {
+        this.requestInfo = requestInfo;
+    }
 
     public int getIs() {
         return is;
@@ -34,5 +50,8 @@ public class TZ_SQL extends LitePalSupport {
         this.is = is;
         this.neirong = neirong;
         this.time = time;
+    }
+
+    public TZ_SQL() {
     }
 }

@@ -5,35 +5,35 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.create.AppClient;
 import com.example.create.R;
 import com.example.create.adapter.YPRYAdapter;
-import com.example.create.adapter.ZPXXListAdapter;
 import com.example.create.bean.JLFS;
 import com.example.create.bean.QYZP;
-import com.example.create.dialog.Z_JLDialog;
-import com.example.create.util.SimpData;
 
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Create by 张瀛煜 on 2020-01-18
  */
 public class Z_YPRYLBActivity extends AppCompatActivity {
-    private ImageView change;
-    private TextView title;
-    private RecyclerView recycleView;
+    @BindView(R.id.change)
+    ImageView change;
+    @BindView(R.id.title)
+    TextView title;
+    @BindView(R.id.recycle_view)
+    RecyclerView recycleView;
     private List<QYZP> qyzps;
     private List<JLFS> jlfs;
     private List<Integer> integers;
@@ -44,8 +44,10 @@ public class Z_YPRYLBActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.yprylb_layout);
+        ButterKnife.bind(this);
         initView();
         initData();
+        title.setText("人才市场--应聘人员");
     }
 
     private void initData() {
@@ -79,5 +81,10 @@ public class Z_YPRYLBActivity extends AppCompatActivity {
         title = findViewById(R.id.title);
         recycleView = findViewById(R.id.recycle_view);
         gridLayoutManager = new GridLayoutManager(this, 1);
+    }
+
+    @OnClick(R.id.change)
+    public void onViewClicked() {
+        finish();
     }
 }
