@@ -25,7 +25,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".activity.Z_RCSCActivity">
 
@@ -80,6 +79,13 @@
 
         </activity>
         <activity android:name=".activity2.Z_GYSXXActivity">
+
+        </activity>
+        <activity android:name=".activity2.Z_GYSCXActivity">
+
+
+        </activity>
+        <activity android:name=".activity2.Z_GYSTJActivity">
 
         </activity>
         <activity android:name=".MainActivity">
