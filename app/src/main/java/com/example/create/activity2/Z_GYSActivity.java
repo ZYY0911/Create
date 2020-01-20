@@ -1,5 +1,6 @@
 package com.example.create.activity2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,7 @@ public class Z_GYSActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.layout_create1:
+                startActivity(new Intent(this,Z_GYSLBActivity.class));
                 break;
             case R.id.layout_create2:
                 break;

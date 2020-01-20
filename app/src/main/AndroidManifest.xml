@@ -70,6 +70,18 @@
         <activity android:name=".activity.Z_XXTAActivity">
 
         </activity>
+        <activity android:name=".activity2.Z_TJGYSActivity">
+
+        </activity>
+        <activity android:name=".activity2.Z_GYSLBActivity">
+
+        </activity>
+        <activity android:name=".activity2.Z_GYSActivity">
+
+        </activity>
+        <activity android:name=".activity2.Z_GYSXXActivity">
+
+        </activity>
         <activity android:name=".MainActivity">
 
         </activity>

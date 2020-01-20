@@ -27,8 +27,15 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.create.R;
+import com.example.create.adapter2.TJSPListAdapter;
 import com.example.create.bean2.GYS;
+import com.example.create.bean2.GYSP;
 import com.example.create.dialog2.TJSPDialog;
+import com.example.create.util.ShowDialog;
+
+import org.litepal.LitePal;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,14 +81,62 @@ public class Z_TJGYSActivity extends AppCompatActivity {
     public static final int CHOOSE_PHOTO = 2;
     public static final int CHOOSE_PHOTO_FRAGMENT = 3;
     private TJSPDialog dialog;
+    private List<GYSP> gysps;
+    private int gsId;
+    private GYS gys;
+    private TJSPListAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tjgys_layout);
         ButterKnife.bind(this);
+        gsId = getIntent().getIntExtra("gs", 0);
+        if (gsId == 0) {
+
+        } else {
+            already();
+        }
         initView();
     }
+
+    private void already() {
+        gys = LitePal.where("id=?", gsId + "").find(GYS.class).get(0);
+        etGysName.setText(gys.getGysName());
+        etGysCity.setText(gys.getGysCity());
+        etGysLaw.setText(gys.getGysLaw());
+        etGysLocation.setText(gys.getGysLocation());
+        etGysPeople.setText(gys.getGysPeople());
+        etGysRange.setText(gys.getGysRange());
+        etGysTel.setText(gys.getGysTel());
+        etGysNum.setText(gys.getGysNum() + "");
+        Glide.with(this).load(gys.getGysPhoto()).into(imagePhoto);
+        gysps = LitePal.where("gysNum=?", gys.getGysNum() + "").find(GYSP.class);
+        adapter = new TJSPListAdapter(Z_TJGYSActivity.this, R.layout.tjsp_item, gysps);
+        listSplb.setAdapter(adapter);
+        adapter.setData(new TJSPListAdapter.SetData() {
+            @Override
+            public void setdata(int position, int lx, boolean sc) {
+                if (lx == 1) {
+                    adapter.setIndex(position);
+                } else if (lx == 2) {
+                    LitePal.deleteAll(GYSP.class, "id=?", gysps.get(position).getId() + "");
+                    gysps.remove(position);
+                } else if (lx == 3) {
+                    dialog = new TJSPDialog(Z_TJGYSActivity.this, Integer.parseInt(etGysNum.getText().toString().trim()));
+                    dialog.show(getSupportFragmentManager(), "aaa");
+                    dialog.setClick(new TJSPDialog.MyClick() {
+                        @Override
+                        public void click() {
+                            already();
+                        }
+                    });
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
 
     private void initView() {
         title.setText("供应商--添加供应商");
@@ -103,6 +158,29 @@ public class Z_TJGYSActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.add_sp:
+                if ("".equals(etGysNum.getText().toString().trim())) {
+                    ShowDialog.Show("请输入供货商信息", this);
+                    return;
+                }
+                dialog = new TJSPDialog(this, Integer.parseInt(etGysNum.getText().toString().trim()));
+                dialog.show(getSupportFragmentManager(), "aaa");
+                dialog.setClick(new TJSPDialog.MyClick() {
+                    @Override
+                    public void click() {
+                        tvNone.setVisibility(View.GONE);
+                        listSplb.setVisibility(View.VISIBLE);
+                        gysps = LitePal.where("gysNum=?", etGysNum.getText().toString().trim()).find(GYSP.class);
+                        adapter = new TJSPListAdapter(Z_TJGYSActivity.this, R.layout.tjsp_item, gysps);
+                        listSplb.setAdapter(adapter);
+                        adapter.setData(new TJSPListAdapter.SetData() {
+                            @Override
+                            public void setdata(int position, int lx, boolean sc) {
+                                adapter.setIndex(position+1);
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                    }
+                });
                 break;
             case R.id.add_save:
                 GYS gys = new GYS();
@@ -115,8 +193,13 @@ public class Z_TJGYSActivity extends AppCompatActivity {
                 gys.setGysTel(etGysTel.getText().toString().trim());
                 gys.setGysPhoto(imageUri);
                 gys.setGysRange(etGysRange.getText().toString().trim());
-                gys.save();
-                Toast.makeText(this, "保存信息成功", Toast.LENGTH_SHORT).show();
+                if (gsId == 0) {
+                    gys.save();
+                    Toast.makeText(this, "保存信息成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    gys.updateAll("id=?", gsId + "");
+                    Toast.makeText(this, "修改信息成功", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -131,9 +214,7 @@ public class Z_TJGYSActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode) {
             case 1:
-                tvNone.setVisibility(View.GONE);
-                listSplb.setVisibility(View.VISIBLE);
-                
+
                 break;
             case CHOOSE_PHOTO:
                 if (resultCode == RESULT_OK) {
@@ -196,7 +277,7 @@ public class Z_TJGYSActivity extends AppCompatActivity {
 
     private void displayImage2(String imagePath) {
         if (imagePath != null) {
-            dialog.imagURl =imagePath;
+            dialog.imagURl = imagePath;
             Glide.with(Z_TJGYSActivity.this).load(imagePath).into(dialog.imagePhoto);
         } else {
             Toast.makeText(this, "错误,请重新选中", Toast.LENGTH_SHORT).show();

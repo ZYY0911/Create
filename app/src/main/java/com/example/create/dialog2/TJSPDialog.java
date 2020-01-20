@@ -20,10 +20,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.create.R;
 import com.example.create.activity.Z_TBXXActivity;
 import com.example.create.activity2.Z_TJGYSActivity;
 import com.example.create.bean2.GYSP;
+
+import org.litepal.LitePal;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,7 +59,18 @@ public class TJSPDialog extends DialogFragment {
     public ImageView imagePhoto;
     private int gsId;
     public String imagURl;
+    private GYSP gysp;
+    private boolean is = true;
 
+    public interface MyClick {
+        void click();
+    }
+
+    private MyClick click;
+
+    public void setClick(MyClick click) {
+        this.click = click;
+    }
 
     public TJSPDialog(Context context, int gsId) {
         this.context = context;
@@ -74,6 +90,19 @@ public class TJSPDialog extends DialogFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         imagePhoto = getView().findViewById(R.id.image_photo);
+        etGysNum.setText(gsId + "");
+        if (LitePal.where("gysNum=?", gsId + "").find(GYSP.class).size() == 0) {
+            is = true;
+        } else {
+            is = false;
+            gysp = LitePal.where("gysNum=?", gsId + "").find(GYSP.class).get(0);
+            etGyspName.setText(gysp.getYlName());
+            etGyspNum.setText(gysp.getYlNum());
+            etGyspPrice.setText(gysp.getYlPrice());
+            Glide.with(getContext()).load(gysp.getYlPhoto()).into(imagePhoto);
+
+
+        }
     }
 
     @Override
@@ -101,9 +130,14 @@ public class TJSPDialog extends DialogFragment {
                 gysp.setYlNum(etGyspNum.getText().toString().trim());
                 gysp.setYlPhoto(imagURl);
                 gysp.setYlPrice(etGyspPrice.getText().toString().trim());
-                gysp.save();
-                Toast.makeText(context, "添加成功", Toast.LENGTH_SHORT).show();
-                getActivity().startActivityForResult(new Intent(), 1);
+                if (is) {
+                    gysp.save();
+                    Toast.makeText(context, "添加成功", Toast.LENGTH_SHORT).show();
+                }else {
+                    gysp.updateAll("gysNum=?",gsId+"");
+                    Toast.makeText(context, "修改成功", Toast.LENGTH_SHORT).show();
+                }
+                click.click();
                 getDialog().dismiss();
                 break;
             case R.id.bt_exit:

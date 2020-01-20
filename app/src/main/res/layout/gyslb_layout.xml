@@ -15,4 +15,13 @@
 
     </ListView>
 
+    <TextView
+        android:id="@+id/tv_none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="当前暂供应商列表"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
 </LinearLayout>

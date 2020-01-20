@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <litepal>
     <dbname value="creatdb"></dbname>
-    <version value="3"></version>
+    <version value="4"></version>
     <list>
         <mapping class="com.example.create.bean.JBXX" />
         <mapping class="com.example.create.bean.JLLB" />
@@ -9,6 +9,8 @@
         <mapping class="com.example.create.bean.QYZP"/>
         <mapping class="com.example.create.bean.JLFS"/>
         <mapping class="com.example.create.bean.TZ_SQL"/>
+        <mapping class="com.example.create.bean2.GYS"/>
+        <mapping class="com.example.create.bean2.GYSP"/>
     </list>
 
 </litepal>
