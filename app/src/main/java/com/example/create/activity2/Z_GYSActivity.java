@@ -44,6 +44,7 @@ public class Z_GYSActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.change:
+                
                 finish();
                 break;
             case R.id.layout_create1:
