@@ -88,6 +88,12 @@
         <activity android:name=".activity2.Z_GYSTJActivity">
 
         </activity>
+        <activity android:name=".activity2.Z_LXGYSActivity">
+            
+        </activity>
+        <activity android:name=".activity2.Z_TJXQActivity">
+
+        </activity>
         <activity android:name=".MainActivity">
 
         </activity>

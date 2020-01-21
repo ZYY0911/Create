@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -46,6 +47,7 @@ public class Z_GYSCXActivity extends AppCompatActivity {
     RecyclerView recycleView;
     private List<String> list;
     private SelectAdapter adapter;
+    private int image[] = {R.drawable.city1, R.drawable.city2, R.drawable.city3, R.drawable.city4, R.drawable.city5};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,37 +78,81 @@ public class Z_GYSCXActivity extends AppCompatActivity {
         List<GYS> gys = LitePal.findAll(GYS.class);
         List<GYSP> gysps = LitePal.findAll(GYSP.class);
         List<GYSCXBean> gyscxBeans = new ArrayList<>();
+        List<String>strings = new ArrayList<>();
         switch (list.get(position)) {
             case "地区":
+                strings.clear();
                 for (int i = 0; i < gys.size(); i++) {
-                    int image;
                     GYS gys1 = gys.get(i);
-                    switch (gys1.getGysCity()) {
-                        case "北京":
-                            image = R.drawable.city1;
-                            break;
-                        case "上海":
-                            image = R.drawable.city2;
-                            break;
-                        case "天津":
-                            image = R.drawable.city3;
-                            break;
-                        case "山东":
-                            image = R.drawable.city4;
-                            break;
-                        default:
-                            image = R.drawable.city5;
-                            break;
+                    strings.add(gys1.getGysCity());
+                    for (int k = 0; k < strings.size(); k++) {
+                        for (int j = strings.size() - 1; j > 0; j--) {
+                            if (strings.get(k).equals(strings.get(j))) {
+                                strings.remove(j);
+                                Log.i("eee", "listClick: ");
+                            }
+                        }
                     }
-                    gyscxBeans.add(new GYSCXBean(gys1.getGysCity(), image));
                 }
-                recycleView.setAdapter(new GYSCXAdapter(gyscxBeans));
+                for (int i = 0,j=0; i < strings.size(); i++,j++) {
+                    if (j==image.length){
+                        j=0;
+                    }
+                    gyscxBeans.add(new GYSCXBean(strings.get(i), image[j]));
+                }
+                recycleView.setAdapter(new GYSCXAdapter(gyscxBeans, 1));
                 break;
             case "业务范围":
+                strings.clear();
+                for (int i = 0; i < gys.size(); i++) {
+                    GYS gys1 = gys.get(i);
+                    strings.add(gys1.getGysRange());
+                    for (int k = 0; k < strings.size(); k++) {
+                        for (int j = strings.size() - 1; j > 0; j--) {
+                            if (strings.get(k).equals(strings.get(j))) {
+                                strings.remove(j);
+                            }
+                        }
+                    }
+                }
+                for (int i = 0,j=0; i < strings.size(); i++,j++) {
+                    if (j==image.length){
+                        j=0;
+                    }
+                    gyscxBeans.add(new GYSCXBean(strings.get(i), image[j]));
+                }
+                recycleView.setAdapter(new GYSCXAdapter(gyscxBeans, 2));
                 break;
             case "原料名称":
+                strings.clear();
+                for (int i = 0; i < gys.size(); i++) {
+                    GYSP gys1 = gysps.get(i);
+                    strings.add(gys1.getYlName());
+                    for (int k = 0; k < strings.size(); k++) {
+                        for (int j = strings.size() - 1; j > 0; j--) {
+                            if (strings.get(k).equals(strings.get(j))) {
+                                strings.remove(j);
+                            }
+                        }
+                    }
+                }
+                for (int i = 0,j=0; i < strings.size(); i++,j++) {
+                    if (j==image.length){
+                        j=0;
+                    }
+                    gyscxBeans.add(new GYSCXBean(strings.get(i), image[j]));
+                }
+                recycleView.setAdapter(new GYSCXAdapter(gyscxBeans, 3));
                 break;
             case "价格":
+                int a=0,b=0,c=0,d=0;
+                for (int i = 0; i < gysps.size(); i++) {
+                    int price = Integer.parseInt(gysps.get(i).getYlPrice());
+                    if (price<5){
+                        a++;
+                    }
+
+                }
                 break;
             case "名称":
                 break;
