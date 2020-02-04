@@ -8,5 +8,18 @@
         <item>专科</item>
         <item>专科以下</item>
     </string-array>
+    <string-array name="scx">
+        <item>生产线一</item>
+        <item>生产线二</item>
+        <item>生产线三</item>
+        <item>生产线四</item>
+    </string-array>
+
+    <string-array name="kcwz">
+        <item>1号仓库</item>
+        <item>2号仓库</item>
+        <item>3号仓库</item>
+        <item>4号仓库</item>
+    </string-array>
 
 </resources>

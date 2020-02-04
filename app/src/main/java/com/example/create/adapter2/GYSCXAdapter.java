@@ -42,7 +42,7 @@ public class GYSCXAdapter extends RecyclerView.Adapter<GYSCXAdapter.MyViewholder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewholder myViewholder, int i) {
+    public void onBindViewHolder(@NonNull MyViewholder myViewholder, final int i) {
         final GYSCXBean gyscxBean = gyscxBeans.get(i);
         myViewholder.itemText.setText(gyscxBean.getName());
         myViewholder.itemImage.setImageResource(gyscxBean.getImage());
@@ -59,6 +59,10 @@ public class GYSCXAdapter extends RecyclerView.Adapter<GYSCXAdapter.MyViewholder
                         break;
                     case 3:
                         intent.putExtra("lx",3);
+                        break;
+                    case 4:
+                        intent.putExtra("lx",4);
+                        intent.putExtra("index",i);
                         break;
                 }
                 intent.putExtra("name", gyscxBean.getName());

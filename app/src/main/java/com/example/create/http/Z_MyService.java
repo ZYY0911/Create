@@ -11,6 +11,12 @@ import com.example.create.bean.JLLB;
 import com.example.create.bean.QYZP;
 import com.example.create.bean.Q_YHZC_SQL;
 import com.example.create.bean.TZ_SQL;
+import com.example.create.bean2.GSCP;
+import com.example.create.bean2.GYS;
+import com.example.create.bean2.GYSP;
+import com.example.create.bean2.JYSJ;
+import com.example.create.bean3.CK;
+import com.example.create.bean3.RK;
 import com.example.create.util.SimpData;
 
 import org.json.JSONArray;
@@ -301,6 +307,15 @@ public class Z_MyService extends NanoHTTPD {
                     } else {
                         return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
                     }
+                case "/send_notifi_info":
+                    file = session.getParms();
+                    if (file.size() == 1) {
+                        TZ_SQL sql = new TZ_SQL(1, file.get("msg"), SimpData.Simp("yyyy-MM-dd", new Date()));
+                        sql.save();
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                    } else {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
                 case "/get_notifi_info":
                     List<TZ_SQL> tz_sqls = LitePal.where("is=?", "1").find(TZ_SQL.class);
                     JSONArray jsonArray3 = new JSONArray();
@@ -327,10 +342,228 @@ public class Z_MyService extends NanoHTTPD {
                     } else {
                         return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
                     }
+                case "/get_gys_info":
+                    List<GYS> gys = LitePal.findAll(GYS.class);
+                    JSONArray jsonArray4 = new JSONArray();
+                    for (int i = 0; i < gys.size(); i++) {
+                        GYS gys1 = gys.get(i);
+                        JSONObject jsonObject21 = new JSONObject();
+                        jsonObject21.put("id", gys1.getId());
+                        jsonObject21.put("city", gys1.getGysCity());
+                        jsonObject21.put("num", gys1.getGysNum());
+                        jsonObject21.put("location", gys1.getGysLocation());
+                        jsonObject21.put("low", gys1.getGysLaw());
+                        jsonObject21.put("tel", gys1.getGysTel());
+                        jsonObject21.put("people", gys1.getGysPeople());
+                        jsonObject21.put("range", gys1.getGysRange());
+                        jsonObject21.put("photo", gys1.getGysPhoto());
+                        jsonArray4.put(jsonObject21);
+                    }
+                    JSONObject jsonObject5 = new JSONObject();
+                    jsonObject5.put("RESULT", "S");
+                    jsonObject5.put("ROWS_DETAIL", jsonArray4);
+                    return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, jsonObject5.toString());
+                case "/set_gys_info":
+                    file = session.getParms();
+                    try {
+                        if (file.size() == 8) {
+                            GYS gys1 = new GYS();
+                            gys1.setGysCity(file.get("city"));
+                            gys1.setGysLocation(file.get("location"));
+                            gys1.setGysLaw(file.get("low"));
+                            gys1.setGysTel(file.get("tel"));
+                            gys1.setGysPeople(file.get("people"));
+                            gys1.setGysRange(file.get("range"));
+                            gys1.setGysPhoto(file.get("photo"));
+                            gys1.updateAll("gysnum=?", file.get("num"));
+                            return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                        } else {
+                            return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                        }
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
+                case "/delete_gys_info":
+                    file = session.getParms();
+                    if (file.size() == 1) {
+                        LitePal.deleteAll(GYS.class, "num=?", file.get("num"));
+                        LitePal.deleteAll(GYSP.class, "gysNum=?", file.get("num"));
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                    } else {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
+                case "/add_gys_sp":
+                    file = session.getParms();
+                    if (file.size() == 5) {
+                        GYSP gysp = new GYSP();
+                        gysp.setGysNum(Integer.parseInt(file.get("gys_num")));
+                        gysp.setYlName(file.get("sp_name"));
+                        gysp.setYlNum(file.get("sp_num"));
+                        gysp.setYlPhoto(file.get("sp_photo"));
+                        gysp.setYlPrice(Integer.parseInt(file.get("sp_price")));
+                        gysp.save();
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                    } else {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
+                case "/delete_gys_sp":
+                    file = session.getParms();
+                    if (file.size() == 1) {
+                        LitePal.deleteAll("ylNum=?", file.get("yl_num"));
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                    } else {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
+                case "/update_gys_sp":
+                    file = session.getParms();
+                    if (file.size() == 3) {
+                        GYSP gysp = new GYSP();
+                        gysp.setYlPrice(Integer.parseInt(file.get("price")));
+                        gysp.setYlName(file.get("yl_name"));
+                        gysp.updateAll("ylNum=?", file.get("yl_num"));
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                    } else {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
+                case "/get_yw_yl":
+                    List<GSCP> gscps = LitePal.findAll(GSCP.class);
+                    JSONArray jsonArray5 = new JSONArray();
+                    for (int i = 0; i < gscps.size(); i++) {
+                        GSCP gscp = gscps.get(i);
+                        JSONObject jsonObject21 = new JSONObject();
+                        jsonObject21.put("id", gscp.getId());
+                        jsonObject21.put("name", gscp.getName());
+                        jsonObject21.put("photo", gscp.getPhoto());
+                        jsonObject21.put("xh", gscp.getXh());
+                        jsonArray5.put(jsonObject21);
+                    }
+                    JSONObject jsonObject6 = new JSONObject();
+                    jsonObject6.put("RESULT", "S");
+                    jsonObject6.put("ROWS_DETAIL", jsonArray5);
+                    return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, jsonObject6.toString());
+                case "/get_yl_jl":
+                    file = session.getParms();
+                    List<JYSJ> jysjs;
+                    if (file.size() == 1) {
+                        jysjs = LitePal.where("name=?", file.get("name")).find(JYSJ.class);
+                    } else {
+                        jysjs = LitePal.findAll(JYSJ.class);
+                    }
+                    JSONArray jsonArray6 = new JSONArray();
+                    for (int i = 0; i < jysjs.size(); i++) {
+                        JYSJ jysj = jysjs.get(i);
+                        JSONObject jsonObject7 = new JSONObject();
+                        jsonObject7.put("id", jysj.getId());
+                        jsonObject7.put("contacts", jysj.getContacts());
+                        jsonObject7.put("contactId", jysj.getCountId());
+                        jsonObject7.put("fp", jysj.getFp());
+                        jsonObject7.put("name", jysj.getName());
+                        jsonObject7.put("shop", jysj.getShop());
+                        jsonObject7.put("time", jysj.getTime());
+                        jsonObject7.put("num", jysj.getNum());
+                        jsonObject7.put("price", jysj.getPrice());
+                        jsonObject7.put("money", jysj.getMoney());
+                        jsonArray6.put(jsonObject7);
+                    }
+                    JSONObject jsonObject8 = new JSONObject();
+                    jsonObject8.put("RESULT", "S");
+                    jsonObject8.put("ROWS_DETAIL", jsonArray6);
+                    return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, jsonObject8.toString());
+                case "/get_rk_info":
+                    List<RK> rks = LitePal.findAll(RK.class);
+                    JSONArray jsonArray7 = new JSONArray();
+                    for (int i = 0; i < rks.size(); i++) {
+                        RK rk = rks.get(i);
+                        JSONObject jsonObject7 = new JSONObject();
+                        jsonObject7.put("id", rk.getId());
+                        jsonObject7.put("ylmc", rk.getYlmc());
+                        jsonObject7.put("xh", rk.getXh());
+                        jsonObject7.put("gys", rk.getGys());
+                        jsonObject7.put("num", rk.getNum());
+                        jsonObject7.put("price", rk.getPrice());
+                        jsonObject7.put("location", rk.getLocation());
+                        jsonObject7.put("time", rk.getTime());
+                        jsonObject7.put("rkr", rk.getKrname());
+                        jsonObject7.put("countId", rk.getCountId());
+                        jsonObject7.put("shop", rk.getShop());
+                        jsonObject7.put("contacts", rk.getContacts());
+                        jsonObject7.put("fp", rk.getFp());
+                        jsonArray7.put(jsonObject7);
+                    }
+                    JSONObject jsonObject9 = new JSONObject();
+                    jsonObject9.put("RESULT", "S");
+                    jsonObject9.put("ROWS_DETAIL", jsonArray7);
+                    return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, jsonObject9.toString());
+                case "/add_rk_info":
+                    file = session.getParms();
+                    if (file.size() == 12) {
+                        RK rk = new RK();
+                        rk.setYlmc(file.get("ylmc"));
+                        rk.setXh(file.get("xh"));
+                        rk.setGys(file.get("gys"));
+                        rk.setNum(Integer.parseInt(file.get("num")));
+                        rk.setPrice(Integer.parseInt(file.get("price")));
+                        rk.setLocation(file.get("location"));
+                        rk.setTime(SimpData.Simp("yyyy-MM-dd", new Date()));
+                        rk.setKrname(file.get("rkr"));
+                        rk.setCountId(file.get("countId"));
+                        rk.setShop(file.get("shop"));
+                        rk.setContacts(file.get("contacts"));
+                        rk.setFp(file.get("fp"));
+                        rk.save();
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                    } else {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
+                case "/add_ck_info":
+                    file = session.getParms();
+                    if (file.size() == 9) {
+                        CK ck = new CK();
+                        ck.setYlmc(file.get("lymc"));
+                        ck.setXh(file.get("xh"));
+                        ck.setGys(file.get("gys"));
+                        ck.setCkr(file.get("ckr"));//出库人
+                        ck.setScx(file.get("scx"));//生产线
+                        ck.setTime(SimpData.Simp("yyyy-MM-dd", new Date()));
+                        ck.setJsr(file.get("jsr"));//接受人
+                        ck.setNum(Integer.parseInt(file.get("num")));
+                        ck.setPrice(Integer.parseInt(file.get("price")));
+                        ck.save();
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                    } else {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
+                case "/get_ck_info":
+                    List<CK> cks = LitePal.findAll(CK.class);
+                    JSONArray jsonArray8 = new JSONArray();
+                    for (int i = 0; i < cks.size(); i++) {
+                        CK rk = cks.get(i);
+                        JSONObject jsonObject7 = new JSONObject();
+                        jsonObject7.put("id", rk.getId());
+                        jsonObject7.put("ylmc", rk.getYlmc());
+                        jsonObject7.put("xh", rk.getXh());
+                        jsonObject7.put("gys", rk.getGys());
+                        jsonObject7.put("num", rk.getNum());
+                        jsonObject7.put("price", rk.getPrice());
+                        jsonObject7.put("scx", rk.getScx());
+                        jsonObject7.put("time", rk.getTime());
+                        jsonObject7.put("ckr", rk.getCkr());
+                        jsonObject7.put("jsr", rk.getJsr());
+                        jsonArray8.put(jsonObject7);
+                    }
+                    JSONObject jsonObject10 = new JSONObject();
+                    jsonObject10.put("RESULT", "S");
+                    jsonObject10.put("ROWS_DETAIL", jsonArray8);
+                    return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, jsonObject10.toString());
+
 
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
         }
         return null;
     }

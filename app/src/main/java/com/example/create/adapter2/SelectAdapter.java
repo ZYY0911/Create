@@ -32,6 +32,9 @@ public class SelectAdapter extends ArrayAdapter<String> {
         layout = resource;
     }
 
+    public int getIndex() {
+        return index;
+    }
 
     @NonNull
     @Override

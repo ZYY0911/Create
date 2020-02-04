@@ -98,10 +98,8 @@ public class TJSPDialog extends DialogFragment {
             gysp = LitePal.where("gysNum=?", gsId + "").find(GYSP.class).get(0);
             etGyspName.setText(gysp.getYlName());
             etGyspNum.setText(gysp.getYlNum());
-            etGyspPrice.setText(gysp.getYlPrice());
+            etGyspPrice.setText(gysp.getYlPrice()+"");
             Glide.with(getContext()).load(gysp.getYlPhoto()).into(imagePhoto);
-
-
         }
     }
 
@@ -129,7 +127,7 @@ public class TJSPDialog extends DialogFragment {
                 gysp.setYlName(etGyspName.getText().toString().trim());
                 gysp.setYlNum(etGyspNum.getText().toString().trim());
                 gysp.setYlPhoto(imagURl);
-                gysp.setYlPrice(etGyspPrice.getText().toString().trim());
+                gysp.setYlPrice(Integer.parseInt(etGyspPrice.getText().toString().trim()));
                 if (is) {
                     gysp.save();
                     Toast.makeText(context, "添加成功", Toast.LENGTH_SHORT).show();

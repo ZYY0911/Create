@@ -11,6 +11,11 @@
         <mapping class="com.example.create.bean.TZ_SQL"/>
         <mapping class="com.example.create.bean2.GYS"/>
         <mapping class="com.example.create.bean2.GYSP"/>
+        <mapping class="com.example.create.bean2.GSCP"/>
+        <mapping class="com.example.create.bean2.JYSJ"/>
+        <mapping class="com.example.create.bean3.RK"/>
+        <mapping class="com.example.create.bean3.CK"/>
+        <mapping class="com.example.create.bean3.YZ"/>
     </list>
 
 </litepal>

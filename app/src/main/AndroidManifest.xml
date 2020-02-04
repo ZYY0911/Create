@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".AppClient"
@@ -22,7 +23,6 @@
         <activity android:name=".activity.Q_YHDR">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -92,6 +92,33 @@
             
         </activity>
         <activity android:name=".activity2.Z_TJXQActivity">
+
+        </activity>
+        <activity android:name=".activity2.Z_GHCXActivity">
+
+        </activity>
+        <activity android:name=".activity2.Z_GHFPActivity">
+
+        </activity>
+        <activity android:name=".activity3.Z_YLGLActivity">
+
+        </activity>
+        <activity android:name=".activity3.Z_RKCXActivity">
+
+        </activity>
+        <activity android:name=".activity3.Z_RKXQActivity">
+
+        </activity>
+        <activity android:name=".activity3.Z_YLGLCKActivity">
+
+        </activity>
+        <activity android:name=".activity3.Z_CKCXActivity">
+
+        </activity>
+        <activity android:name=".activity3.Z_KCXQActivity">
+
+        </activity>
+        <activity android:name=".activity3.Z_YZSZActivity">
 
         </activity>
         <activity android:name=".MainActivity">

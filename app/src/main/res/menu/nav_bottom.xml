@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_kc"
+        android:icon="@mipmap/ic_comment"
+        android:title="库存" />
+
+
+    <item
+        android:id="@+id/navigation_yj"
+        android:icon="@mipmap/nav_mail"
+        android:title="预警" />
+
+    <item
+        android:id="@+id/navigation_rk"
+        android:icon="@mipmap/nav_location"
+        android:title="入库" />
+
+    <item
+        android:id="@+id/navigation_ck"
+        android:icon="@mipmap/nav_friends"
+        android:title="出库" />
+
+</menu>

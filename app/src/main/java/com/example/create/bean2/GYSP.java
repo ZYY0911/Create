@@ -8,7 +8,8 @@ import org.litepal.crud.LitePalSupport;
  */
 public class GYSP extends LitePalSupport {
     private int id,gysNum;
-    private String ylName,ylNum,ylPhoto,ylPrice;
+    private String ylName,ylNum,ylPhoto;
+    private int ylPrice;
 
     public int getId() {
         return id;
@@ -50,11 +51,11 @@ public class GYSP extends LitePalSupport {
         this.ylPhoto = ylPhoto;
     }
 
-    public String getYlPrice() {
+    public int getYlPrice() {
         return ylPrice;
     }
 
-    public void setYlPrice(String ylPrice) {
+    public void setYlPrice(int ylPrice) {
         this.ylPrice = ylPrice;
     }
 }

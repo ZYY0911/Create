@@ -37,6 +37,7 @@ public class Z_LXGYSActivity extends AppCompatActivity {
     private String name;
     private List<GYS> gys;
     private LXGYSAdapter adapter;
+    private int index;
 
 
     @Override
@@ -61,15 +62,62 @@ public class Z_LXGYSActivity extends AppCompatActivity {
             case 3:
                 initYl();
                 break;
+            case 4:
+                initJg();
+                break;
+            case 5:
+                initMc();
+                break;
+            case 6:
+                initLx();
+                break;
         }
 
     }
 
-    private void initYl() {
-        List<GYSP> gysps = LitePal.where("ylName=?" ,name).find(GYSP.class);
+    private void initJg() {
+        List<GYSP> gysps = new ArrayList<>();
+        index = getIntent().getIntExtra("index", 0);
+        switch (index) {
+            case 0:
+                gysps = LitePal.where("ylPrice < ?", "5").find(GYSP.class);
+                break;
+            case 1:
+                gysps = LitePal.where("ylPrice>=? and ylPrice<?", "5", "10").find(GYSP.class);
+                break;
+            case 2:
+                gysps = LitePal.where("ylPrice>=? and ylPrice<?", "10", "15").find(GYSP.class);
+                break;
+            case 3:
+                gysps = LitePal.where("ylPrice > ?", "15").find(GYSP.class);
+                break;
+        }
         gys = new ArrayList<>();
         for (int i = 0; i < gysps.size(); i++) {
-            List<GYS> gys1 = LitePal.where("gysNum=?",gysps.get(i).getGysNum()+"").find(GYS.class);
+            List<GYS> gys1 = LitePal.where("gysNum=?", gysps.get(i).getGysNum() + "").find(GYS.class);
+            for (int j = 0; j < gys1.size(); j++) {
+                gys.add(gys1.get(j));
+            }
+        }
+        setList();
+    }
+
+    private void initLx() {
+        gys = LitePal.where("gysPeople=?", name).find(GYS.class);
+        setList();
+    }
+
+    private void initMc() {
+        gys = LitePal.where("gysName=?", name).find(GYS.class);
+        setList();
+
+    }
+
+    private void initYl() {
+        List<GYSP> gysps = LitePal.where("ylName=?", name).find(GYSP.class);
+        gys = new ArrayList<>();
+        for (int i = 0; i < gysps.size(); i++) {
+            List<GYS> gys1 = LitePal.where("gysNum=?", gysps.get(i).getGysNum() + "").find(GYS.class);
             for (int j = 0; j < gys1.size(); j++) {
                 gys.add(gys1.get(j));
             }

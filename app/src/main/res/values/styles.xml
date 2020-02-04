@@ -17,4 +17,12 @@
         <item name="android:button">@drawable/checkbox</item>
     </style>
 
+
+    <declare-styleable name="SideBar">
+        <attr name="scaleSize" format="integer"/>
+        <attr name="scaleItemCount" format="integer"/>
+        <attr name="scaleWidth" format="dimension"/>
+    </declare-styleable>
+
+
 </resources>

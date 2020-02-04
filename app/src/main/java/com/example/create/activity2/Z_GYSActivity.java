@@ -44,7 +44,6 @@ public class Z_GYSActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.change:
-                
                 finish();
                 break;
             case R.id.layout_create1:
@@ -54,6 +53,7 @@ public class Z_GYSActivity extends AppCompatActivity {
                 startActivity(new Intent(this,Z_GYSCXActivity.class));
                 break;
             case R.id.layout_create3:
+                startActivity(new Intent(this,Z_GHCXActivity.class));
                 break;
             case R.id.layout_create4:
                 startActivity(new Intent(this,Z_GYSTJActivity.class));

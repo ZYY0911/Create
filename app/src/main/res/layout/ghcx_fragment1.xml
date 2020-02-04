@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/left_"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1">
+
+
+        <ListView
+            android:id="@+id/left_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="#70DB29">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="总供货次数:"
+                android:textColor="#fff"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/left_ghcs"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="总供货"
+                android:textColor="#fff"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="总交易金额:"
+                android:textColor="#fff"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/left_je"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="总供货"
+                android:textColor="#fff"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:text="时间上限"
+                android:textColor="#000"
+                android:textSize="30sp" />
+
+
+            <LinearLayout
+                android:id="@+id/left_layout_start"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/z_bg_l"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/left_text_start"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="2020-01-01"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/xiajiantoulan" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:text="时间下限"
+                android:textColor="#000"
+                android:textSize="30sp" />
+
+
+            <LinearLayout
+                android:id="@+id/left_layout_end"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/z_bg_l"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/left_text_end"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/xiajiantoulan" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/left_clear"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="#2196F3"
+                android:text="清空"
+                android:textColor="#fff"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#ccc"
+            android:text="      交易详情"
+            android:textColor="#000"
+            android:textSize="35sp" />
+
+        <ListView
+            android:background="#ccc"
+            android:id="@+id/left_list_view2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+
+        <TextView
+            android:id="@+id/left_jy_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="暂无交易记录"
+            android:textColor="#000"
+            android:textSize="35sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

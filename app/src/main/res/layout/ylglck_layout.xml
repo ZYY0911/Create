@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/z_head" />
+
+    <LinearLayout
+        android:layout_width="1200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="#4A82C3"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="   原料名称:"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/tv_ylmc"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="原料名称"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="型号:"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/tv_xh"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="原料名称"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="出货人:"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/tv_chr"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="原料名称"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="接收人:"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+
+        <EditText
+            android:id="@+id/et_jsr"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="1200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="#4A82C3"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="   总出货量:"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/et_chl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/bt_sg"
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            android:text="手工选择"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="1200dp"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/toall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="100dp"
+            android:gravity="center"
+            android:text="总计:0"
+            android:textColor="#000"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="1200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="#4A82C3"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="   生产线:"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:id="@+id/layout_first"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/shape_circle_6" />
+
+            <TextView
+                android:id="@+id/text_scx1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生产线一"
+                android:textColor="#000"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_second"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/shape_circle_7" />
+
+            <TextView
+                android:id="@+id/text_scx2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生产线二"
+                android:textColor="#000"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_third"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/shape_circle_8" />
+
+            <TextView
+                android:id="@+id/text_scx3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生产线三"
+                android:textColor="#000"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_forth"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/shape_circle_9" />
+
+            <TextView
+                android:id="@+id/text_scx4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生产线四"
+                android:textColor="#000"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="1200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/bu_sure"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:background="#4A82C3"
+            android:text="确定"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+</LinearLayout>

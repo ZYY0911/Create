@@ -51,13 +51,44 @@
 
         </ListView>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycle_view"
+        <LinearLayout
+            android:id="@+id/first_layout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_height="match_parent"
             android:layout_weight="4">
 
-        </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:id="@+id/second_layout">
+
+            <ListView
+                android:id="@+id/listView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+            <com.example.create.util.SideBar
+                android:id="@+id/side_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 

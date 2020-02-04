@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/ylmc_item"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="原料名称"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/xh_item"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="型号"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/kcl_item"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="库存量"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/wz_item"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="位置"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+</LinearLayout>

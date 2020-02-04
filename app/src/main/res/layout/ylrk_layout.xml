@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/find_history"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/gbg"
+            android:text="查看历史"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="原料名称："
+            android:textColor="#000"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/et_ylmc"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="供应商："
+            android:textColor="#000"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/et_gys"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+            <EditText
+                android:id="@+id/et_num"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="数量"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textSize="30sp" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+            <EditText
+                android:id="@+id/et_price"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="单价"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textSize="30sp" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="库存位置："
+                android:textColor="#000"
+                android:textSize="30sp" />
+
+            <Spinner
+                android:id="@+id/et_kcwz"
+                android:entries="@array/kcwz"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:textSize="30sp" />
+            </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+            <EditText
+                android:id="@+id/et_cgy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="采购员"
+                android:singleLine="true"
+                android:textSize="30sp" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+            <EditText
+                android:id="@+id/et_lxr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="联系人"
+                android:singleLine="true"
+                android:textSize="30sp" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+            <EditText
+                android:id="@+id/et_dfzh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="对方账号"
+                android:singleLine="true"
+                android:textSize="30sp" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:errorTextAppearance="@style/TextAppearance.Design.Error">
+
+            <EditText
+                android:id="@+id/et_fp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:enabled="false"
+                android:hint="发票"
+                android:singleLine="true"
+                android:textSize="30sp" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/bt_load"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/gbg"
+                android:text="上传"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bt_save"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/gbg"
+            android:text="保存"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

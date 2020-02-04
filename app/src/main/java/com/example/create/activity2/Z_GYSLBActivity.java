@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.create.R;
 import com.example.create.adapter2.GYSLBAdapter;
 import com.example.create.bean2.GYS;
+import com.example.create.bean2.GYSP;
 
 import org.litepal.LitePal;
 
@@ -109,6 +110,7 @@ public class Z_GYSLBActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         LitePal.deleteAll(GYS.class,"id=?",gys1.getId()+"");
+                        LitePal.deleteAll(GYSP.class, "gysNum=?", gys1.getGysNum()+"");
                         initData();
                         dialog.dismiss();
                     }
@@ -123,7 +125,7 @@ public class Z_GYSLBActivity extends AppCompatActivity {
                 break;
             case 2:
                 Intent intent = new Intent(this,Z_TJGYSActivity.class);
-                intent.putExtra("gs",gys.get(index).getId());
+                intent.putExtra("gs",gys.get(menuInfo.position).getId());
                 startActivity(intent);
                 break;
         }

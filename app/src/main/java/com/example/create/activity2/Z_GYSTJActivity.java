@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.create.R;
+import com.example.create.bean2.GSCP;
 import com.example.create.bean2.GYS;
 import com.example.create.bean2.GYSP;
+import com.example.create.bean2.JYSJ;
+import com.example.create.bean3.RK;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -68,6 +72,89 @@ public class Z_GYSTJActivity extends AppCompatActivity {
         title.setText("供应商--供应商统计");
         initLeftTop();
         initRightTop();
+        initLeftBottom();
+        initRightBottom();
+    }
+
+    private void initRightBottom() {
+        List<GSCP> gscps = LitePal.findAll(GSCP.class);
+        List<Integer> colors = new ArrayList<>();
+        Map<String, Integer> map = new HashMap<>();
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < gscps.size(); i++) {
+            GSCP gscp = gscps.get(i);
+            List<RK> jysjs = LitePal.where("ylmc=?", gscp.getName()).find(RK.class);
+            int money = (map.get(gscp.getName())==null)? 0:map.get(gscp.getName());
+            for (int j = 0; j < jysjs.size(); j++) {
+                money += (jysjs.get(j).getNum()*jysjs.get(j).getPrice());
+            }
+            map.put(gscp.getName(), money);
+            colors.add(getColor());
+            strings.add(gscp.getName());
+        }
+        List<BarEntry> barEntries = new ArrayList<>();
+        for (int i = 0; i < map.size(); i++) {
+            barEntries.add(new BarEntry(i, map.get(strings.get(i))));
+        }
+        BarDataSet dataSet = new BarDataSet(barEntries, "");
+        dataSet.setColors(colors);
+        dataSet.setValueFormatter(new IValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                DecimalFormat format = new DecimalFormat("0.0");
+                return format.format(value) + "元";
+            }
+        });
+        BarData data = new BarData(dataSet);
+        data.setBarWidth(0.3f);
+        barChartRightBottom.setData(data);
+        XAxis xAxis = barChartRightBottom.getXAxis();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(strings));
+        xAxis.setGranularity(1f);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawAxisLine(false);
+        YAxis yAxis = barChartRightBottom.getAxisRight();
+        yAxis.setStartAtZero(true);
+        yAxis.setEnabled(false);
+        YAxis yAxis1 = barChartRightBottom.getAxisLeft();
+        yAxis1.setStartAtZero(true);
+        barChartRightBottom.getLegend().setEnabled(false);
+        barChartRightBottom.getDescription().setText("所有供应商交易总金额统计图");
+        barChartRightBottom.getDescription().setTextSize(15);
+        barChartRightBottom.setDoubleTapToZoomEnabled(false);
+        barChartRightBottom.invalidate();
+    }
+
+    private void initLeftBottom() {
+        List<GSCP> gscps = LitePal.findAll(GSCP.class);
+        List<Integer> colors = new ArrayList<>();
+        int a = 0, b = 0;
+        for (int i = gscps.size() - 1; i >= 0; i--) {
+            GSCP gscp = gscps.get(i);
+            List<RK> jysjs = LitePal.where("ylmc=?", gscp.getName()).find(RK.class);
+            if (jysjs.size() == 0) {
+                a++;
+            } else {
+                b++;
+            }
+            colors.add(getColor());
+        }
+        List<PieEntry> pieEntries = new ArrayList<>();
+        pieEntries.add(new PieEntry(a, "没有业务供应商"));
+        pieEntries.add(new PieEntry(b, "有业务供应商"));
+        PieDataSet dataSet = new PieDataSet(pieEntries, "");
+        dataSet.setValueFormatter(new PercentFormatter());
+        dataSet.setColors(colors);
+        dataSet.setSliceSpace(3f);
+        PieData data = new PieData(dataSet);
+        pieChartLeftBottom.setData(data);
+        pieChartLeftBottom.setDrawHoleEnabled(false);
+        pieChartLeftBottom.setRotationEnabled(false);
+        pieChartLeftBottom.getDescription().setText("有无业务供应商统计图");
+        pieChartLeftBottom.getDescription().setTextSize(15);
+        pieChartLeftBottom.setTouchEnabled(false);
+        pieChartLeftBottom.setUsePercentValues(true);
+        pieChartLeftBottom.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
     }
 
     private void initRightTop() {
@@ -83,7 +170,7 @@ public class Z_GYSTJActivity extends AppCompatActivity {
                 map.put(name, (count == null) ? 1 : count + 1);
                 strings.add(name);
                 for (int k = 0; k < strings.size(); k++) {
-                    for (int j = strings.size() - 1; j > 0; j--) {
+                    for (int j = strings.size() - 1; j > k; j--) {
                         if (strings.get(k).equals(strings.get(j))) {
                             strings.remove(j);
                         }
@@ -94,7 +181,7 @@ public class Z_GYSTJActivity extends AppCompatActivity {
         }
         List<PieEntry> pieEntries = new ArrayList<>();
         for (int i = 0; i < strings.size(); i++) {
-            pieEntries.add(new PieEntry(gysps.size() / map.get(strings.get(i)), strings.get(i)));
+            pieEntries.add(new PieEntry((float) map.get(strings.get(i)) / (float) gysps.size(), strings.get(i)));
         }
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
         dataSet.setValueFormatter(new PercentFormatter());
@@ -107,6 +194,7 @@ public class Z_GYSTJActivity extends AppCompatActivity {
         pieChartRightTop.getDescription().setText("不同产品供应商数量统计图");
         pieChartRightTop.getDescription().setTextSize(15);
         pieChartRightTop.setTouchEnabled(false);
+        pieChartRightTop.setUsePercentValues(true);
         pieChartRightTop.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
     }
 
@@ -118,10 +206,11 @@ public class Z_GYSTJActivity extends AppCompatActivity {
         for (int i = 0; i < gys.size(); i++) {
             String city = gys.get(i).getGysCity();
             Integer count = map.get(city);
+            Log.i("aaa", "initLeftTop: bb" + city);
             map.put(city, (count == null) ? 1 : count + 1);
             strings.add(city);
             for (int k = 0; k < strings.size(); k++) {
-                for (int j = strings.size() - 1; j > 0; j--) {
+                for (int j = strings.size() - 1; j > k; j--) {
                     if (strings.get(k).equals(strings.get(j))) {
                         strings.remove(j);
                     }
@@ -131,7 +220,7 @@ public class Z_GYSTJActivity extends AppCompatActivity {
         }
         List<BarEntry> barEntries = new ArrayList<>();
         for (int i = 0; i < map.size(); i++) {
-            barEntries.add(new BarEntry(i, gys.size() / map.get(strings.get(i))));
+            barEntries.add(new BarEntry(i, (float) map.get(strings.get(i)) / (float) gys.size()));
         }
         BarDataSet dataSet = new BarDataSet(barEntries, "");
         dataSet.setColors(colors);
@@ -175,17 +264,19 @@ public class Z_GYSTJActivity extends AppCompatActivity {
 
     @OnClick({R.id.bar_chart_left_top, R.id.pie_chart_right_top, R.id.pie_chart_left_bottom, R.id.bar_chart_right_bottom})
     public void onViewClicked(View view) {
-        Intent intent  = new Intent(this,Z_TJXQActivity.class);
+        Intent intent = new Intent(this, Z_TJXQActivity.class);
         switch (view.getId()) {
             case R.id.bar_chart_left_top:
-                intent.putExtra("lx",1);
+                intent.putExtra("lx", 1);
                 break;
             case R.id.pie_chart_right_top:
-                intent.putExtra("lx",2);
+                intent.putExtra("lx", 2);
                 break;
             case R.id.pie_chart_left_bottom:
+                intent.putExtra("lx", 3);
                 break;
             case R.id.bar_chart_right_bottom:
+                intent.putExtra("lx", 4);
                 break;
         }
         startActivity(intent);

@@ -20,6 +20,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.TimePickerView;
 import com.bumptech.glide.Glide;
 import com.example.create.AppClient;
 import com.example.create.R;
@@ -29,6 +32,8 @@ import com.example.create.util.ShowDialog;
 
 import org.litepal.LitePal;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -134,7 +139,20 @@ public class Z_JBCCFragment extends Fragment {
                 }
             }
         });
-
+        etBirth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerView timePickerView = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
+                    @Override
+                    public void onTimeSelect(Date date, View v) {
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                        etBirth.setText(format.format(date));
+                        etBirth.setSelection(format.format(date).toString().length());
+                    }
+                }).isDialog(true).build();
+                timePickerView.show();
+            }
+        });
     }
 
     private void openAlbum() {
@@ -193,6 +211,7 @@ public class Z_JBCCFragment extends Fragment {
         etSchool.setEnabled(is);
         etSex.setEnabled(is);
         etXl.setEnabled(is);
+        etLove.setEnabled(is);
         etTel.setEnabled(is);
         etYx.setEnabled(is);
         addPhoto.setEnabled(is);
@@ -202,6 +221,7 @@ public class Z_JBCCFragment extends Fragment {
         } else {
             btEdit.setText("编辑");
         }
+
     }
 
     private void initView() {

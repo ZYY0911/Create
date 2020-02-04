@@ -3,6 +3,7 @@ package com.example.create.activity2;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.create.R;
+import com.example.create.bean2.GSCP;
 import com.example.create.bean2.GYS;
 import com.example.create.bean2.GYSP;
+import com.example.create.bean2.JYSJ;
+import com.example.create.bean3.RK;
 
 import org.litepal.LitePal;
 
@@ -55,7 +59,68 @@ public class Z_TJXQActivity extends AppCompatActivity {
             case 2:
                 initSl();
                 break;
+            case 3:
+                initYw();
+                break;
+            case 4:
+                initJy();
+                break;
         }
+    }
+
+    private void initJy() {
+        List<GSCP> gscps = LitePal.findAll(GSCP.class);
+        Map<String, Integer> maps = new HashMap<>();
+        strings = new ArrayList<>();
+        List<String> strings1 = new ArrayList<>();
+        for (int i = 0; i < gscps.size(); i++) {
+            GSCP gscp = gscps.get(i);
+            List<RK> jysjs = LitePal.where("ylmc=?", gscp.getName()).find(RK.class);
+            int money = (maps.get(gscp.getName()) == null) ? 0 : maps.get(gscp.getName());
+            for (int j = 0; j < jysjs.size(); j++) {
+                money +=(jysjs.get(j).getNum()*jysjs.get(j).getPrice());
+            }
+            maps.put(gscp.getName(), money);
+            strings1.add(gscp.getName());
+        }
+        map = new HashMap<>();
+        for (int i = 0; i < strings1.size(); i++) {
+            List<RK> jysjs = LitePal.where("ylmc=?", strings1.get(i)).find(RK.class);
+            if (jysjs.size() == 0) {
+                map.put(strings1.get(i) + "\n     交易总金额:" + maps.get(strings1.get(i)), new ArrayList<String>());
+            } else {
+                List<String> stringList = new ArrayList<>();
+                for (int j = 0; j < jysjs.size(); j++) {
+                    stringList.add("交易时间:" + jysjs.get(j).getTime() + "     交易金额:" +(jysjs.get(j).getNum()*jysjs.get(j).getPrice()));
+                }
+                map.put(strings1.get(i) + "\n     交易总金额:" + maps.get(strings1.get(i)), stringList);
+            }
+            strings.add(strings1.get(i) + "\n     交易总金额:" + maps.get(strings1.get(i)));
+        }
+        expandedMenu.setAdapter(new MyAdapter());
+    }
+    private void initYw() {
+        strings = new ArrayList<>();
+        strings.add("存在业务");
+        strings.add("不存在业务");
+        map = new HashMap<>();
+        List<GSCP> gscps = LitePal.findAll(GSCP.class);
+        for (int i = 0; i < gscps.size(); i++) {
+            GSCP gscp = gscps.get(i);
+            List<RK> jysjs = LitePal.where("ylmc=?", gscp.getName()).find(RK.class);
+            if (jysjs.size() == 0) {
+                List<String> count = map.get(strings.get(1));
+                if (count == null) count = new ArrayList<>();
+                count.add(gscp.getName());
+                map.put(strings.get(1), count);
+            } else {
+                List<String> count = map.get(strings.get(0));
+                if (count == null) count = new ArrayList<>();
+                count.add(gscp.getName());
+                map.put(strings.get(0), count);
+            }
+        }
+        expandedMenu.setAdapter(new MyAdapter());
     }
 
     private void initSl() {
@@ -73,9 +138,11 @@ public class Z_TJXQActivity extends AppCompatActivity {
                     count.add(gys1.get(j).getGysName());
                 }
                 map.put(gysps.get(i).getYlName(), count);
+            } else {
+                map.put(gysps.get(i).getYlName(), new ArrayList<String>());
             }
             for (int k = 0; k < strings.size(); k++) {
-                for (int j = strings.size() - 1; j > 0; j--) {
+                for (int j = strings.size() - 1; j > k; j--) {
                     if (strings.get(k).equals(strings.get(j))) {
                         strings.remove(j);
                     }
@@ -97,7 +164,7 @@ public class Z_TJXQActivity extends AppCompatActivity {
             count.add(gys.get(i).getGysName());
             map.put(city, count);
             for (int k = 0; k < strings.size(); k++) {
-                for (int j = strings.size() - 1; j > 0; j--) {
+                for (int j = strings.size() - 1; j > k; j--) {
                     if (strings.get(k).equals(strings.get(j))) {
                         strings.remove(j);
                     }
@@ -116,6 +183,7 @@ public class Z_TJXQActivity extends AppCompatActivity {
 
         @Override
         public int getChildrenCount(int groupPosition) {
+            Log.i("ffff", "getChildrenCount: " + map.get(strings.get(groupPosition)).size());
             return map.get(strings.get(groupPosition)).size();
         }
 
