@@ -121,6 +121,16 @@
         <activity android:name=".activity3.Z_YZSZActivity">
 
         </activity>
+        <activity android:name=".activity4.Z_YGXXActivity"
+            android:label="员工信息">
+
+        </activity>
+        <activity android:name=".activity4.Z_TJXXActivity">
+
+        </activity>
+        <activity android:name=".activity4.Z_XGXXActivity">
+
+        </activity>
         <activity android:name=".MainActivity">
 
         </activity>

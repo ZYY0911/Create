@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/in_read"
+        android:title="导入"
+        app:showAsAction="never"/>
+    <item android:id="@+id/out_read"
+        android:title="导出"
+        app:showAsAction="never"/>
+    <item android:id="@+id/delete_select"
+        android:title="批量删除"
+        app:showAsAction="never"/>
+
+</menu>

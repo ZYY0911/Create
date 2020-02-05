@@ -23,6 +23,7 @@ import com.example.create.bean2.GYS;
 import com.example.create.bean2.GYSCXBean;
 import com.example.create.bean2.GYSCXBean2;
 import com.example.create.bean2.GYSP;
+import com.example.create.util.PasePing;
 import com.example.create.util.SideBar;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
@@ -171,7 +172,7 @@ public class Z_GYSCXActivity extends AppCompatActivity {
                 firstLayout.setVisibility(View.VISIBLE);
                 secondLayout.setVisibility(View.GONE);
                 strings.clear();
-                for (int i = 0; i < gys.size(); i++) {
+                for (int i = 0; i < gysps.size(); i++) {
                     GYSP gys1 = gysps.get(i);
                     strings.add(gys1.getYlName());
                     for (int k = 0; k < strings.size(); k++) {
@@ -217,11 +218,10 @@ public class Z_GYSCXActivity extends AppCompatActivity {
                 secondLayout.setVisibility(View.VISIBLE);
                 for (int i = 0; i < gys.size(); i++) {
                     GYS gys1 = gys.get(i);
-                    String pingying = getPinYinFirstLetter(gys1.getGysName());
+                    String pingying = PasePing.getPinYinFirstLetter(gys1.getGysName());
                     if (!pingying.matches("[A-Z]")) {
                         pingying = "#";
                     }
-
                     gyscxBeans2.add(new GYSCXBean2(gys1.getGysName(), gys1.getGysPhoto(), pingying));
                     Collections.sort(gyscxBeans2, new Comparator<GYSCXBean2>() {
                         @Override
@@ -235,8 +235,8 @@ public class Z_GYSCXActivity extends AppCompatActivity {
                             }
                         }
                     });
-                    listView2.setAdapter(new SortAdapter(this, R.layout.sort_item, gyscxBeans2, 1));
                 }
+                listView2.setAdapter(new SortAdapter(this, R.layout.sort_item, gyscxBeans2, 1));
                 initLisent(gyscxBeans2);
                 break;
             case "联系人":
@@ -244,11 +244,10 @@ public class Z_GYSCXActivity extends AppCompatActivity {
                 secondLayout.setVisibility(View.VISIBLE);
                 for (int i = 0; i < gys.size(); i++) {
                     GYS gys1 = gys.get(i);
-                    String pingying = getPinYinFirstLetter(gys1.getGysPeople());
+                    String pingying = PasePing.getPinYinFirstLetter(gys1.getGysPeople());
                     if (!pingying.matches("[A-Z]")) {
                         pingying = "#";
                     }
-
                     gyscxBeans2.add(new GYSCXBean2(gys1.getGysPeople(), gys1.getGysPhoto(), pingying));
                     Collections.sort(gyscxBeans2, new Comparator<GYSCXBean2>() {
                         @Override
@@ -262,8 +261,8 @@ public class Z_GYSCXActivity extends AppCompatActivity {
                             }
                         }
                     });
-                    listView2.setAdapter(new SortAdapter(this, R.layout.sort_item, gyscxBeans2, 2));
                 }
+                listView2.setAdapter(new SortAdapter(this, R.layout.sort_item, gyscxBeans2, 2));
                 initLisent(gyscxBeans2);
                 break;
         }
@@ -281,22 +280,7 @@ public class Z_GYSCXActivity extends AppCompatActivity {
         recycleView.setLayoutManager(gridLayoutManager);
     }
 
-    public static String getPinYinFirstLetter(String str) {
-        if ("".equals(str)) {
-            return "#";
-        } else {
-            StringBuffer sb = new StringBuffer();
-            sb.setLength(0);
-            char c = str.charAt(0);
-            String[] pinyinArray = PinyinHelper.toHanyuPinyinStringArray(c);
-            if (pinyinArray != null) {
-                sb.append(pinyinArray[0].charAt(0));
-            } else {
-                sb.append(c);
-            }
-            return sb.toString().toUpperCase();
-        }
-    }
+
 
     @OnClick(R.id.change)
     public void onViewClicked() {

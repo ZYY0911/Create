@@ -102,6 +102,7 @@ public class Z_WDJLActivity extends AppCompatActivity {
                 if (cursor == null) {
                     // 未查询到，说明为普通文件，可直接通过URI获取文件路径
                     String path = uri.getPath();
+                    dialog.etWj.setText(path);
                     return;
                 }
                 if (cursor.moveToFirst()) {

@@ -17,6 +17,7 @@ import com.example.create.bean2.GYSP;
 import com.example.create.bean2.JYSJ;
 import com.example.create.bean3.CK;
 import com.example.create.bean3.RK;
+import com.example.create.bean3.YZ;
 import com.example.create.util.SimpData;
 
 import org.json.JSONArray;
@@ -556,7 +557,32 @@ public class Z_MyService extends NanoHTTPD {
                     jsonObject10.put("RESULT", "S");
                     jsonObject10.put("ROWS_DETAIL", jsonArray8);
                     return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, jsonObject10.toString());
-
+                case "/get_yz":
+                    YZ yz = LitePal.findAll(YZ.class).get(0);
+                    JSONObject jsonObject7 = new JSONObject();
+                    jsonObject7.put("RESULT", "S");
+                    jsonObject7.put("apple", yz.getApple());
+                    jsonObject7.put("banana", yz.getBanban());
+                    jsonObject7.put("cherry", yz.getCherry());
+                    jsonObject7.put("grape", yz.getGrape());
+                    jsonObject7.put("mango", yz.getMango());
+                    jsonObject7.put("orange", yz.getOrange());
+                    return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, jsonObject7.toString());
+                case "/set_yz":
+                    file = session.getParms();
+                    if (file.size() == 6) {
+                        YZ yz1 = new YZ();
+                        yz1.setApple(Integer.parseInt(file.get("apple")));
+                        yz1.setBanban(Integer.parseInt(file.get("banana")));
+                        yz1.setCherry(Integer.parseInt(file.get("cherry")));
+                        yz1.setGrape(Integer.parseInt(file.get("grape")));
+                        yz1.setMango(Integer.parseInt(file.get("mango")));
+                        yz1.setOrange(Integer.parseInt(file.get("orange")));
+                        yz1.updateAll("id=?","1");
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                    } else {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
 
             }
         } catch (JSONException e) {

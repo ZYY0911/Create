@@ -30,6 +30,7 @@ import com.example.create.fragment3.Z_YZSZFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Create by 张瀛煜 on 2020-02-02
@@ -141,6 +142,7 @@ public class Z_YLGLActivity extends AppCompatActivity {
                 startActivity(new Intent(Z_YLGLActivity.this, Z_YZSZActivity.class));
             }
         });
+        bottomNav.setSelectedItemId(R.id.navigation_yj);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -169,5 +171,10 @@ public class Z_YLGLActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @OnClick(R.id.change)
+    public void onViewClicked() {
+        finish();
     }
 }

@@ -15,6 +15,7 @@ import com.example.create.AppClient;
 import com.example.create.R;
 import com.example.create.activity2.Z_GYSActivity;
 import com.example.create.activity3.Z_YLGLActivity;
+import com.example.create.activity4.Z_YGXXActivity;
 import com.example.create.bean.Q_YHZC_SQL;
 import com.example.create.http.Z_MyService;
 import com.example.create.net.VolleyLo;
@@ -163,6 +164,12 @@ public class Z_ZYActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Z_ZYActivity.this, Z_YLGLActivity.class));
+            }
+        });
+        layoutYgxx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Z_ZYActivity.this, Z_YGXXActivity.class));
             }
         });
 
