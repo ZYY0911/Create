@@ -31,6 +31,9 @@ public class Q_YHZC_SQL extends LitePalSupport {
         this.yx = yx;
     }
 
+    public Q_YHZC_SQL() {
+    }
+
     private int jine;
     public String getYhm() {
         return yhm;

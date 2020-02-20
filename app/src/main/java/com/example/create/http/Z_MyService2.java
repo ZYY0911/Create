@@ -342,6 +342,24 @@ public class Z_MyService2 extends NanoHTTPD {
                     } else {
                         return newFixedLengthResponse(Response.Status.OK, "application/json", noJson.toString());
                     }
+                case "/set_log":
+                    session.parseBody(map);
+                    body = map.get("postData");
+                    bodyJson = new JSONObject(body);
+                    try {
+                        Q_YHZC_SQL qYhzcSql = new Q_YHZC_SQL();
+                        qYhzcSql.setYhm(bodyJson.optString("UserName"));
+                        qYhzcSql.setMima(bodyJson.optString("PassWord"));
+                        qYhzcSql.setJine(1000);
+                        qYhzcSql.setYx(bodyJson.optString("email"));
+                        qYhzcSql.save();
+                        return newFixedLengthResponse(Response.Status.OK, "application/json", yesJson.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return newFixedLengthResponse(Response.Status.OK, "application/json", noJson.toString());
+                    }
+
+
                 case "/send_notifi_info":
                     session.parseBody(map);
                     body = map.get("postData");
