@@ -7,20 +7,21 @@
 
     <include layout="@layout/z_head" />
 
+
     <FrameLayout
-        android:id="@+id/frame_layout3"
+        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7">
+        android:layout_weight="9">
 
     </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_nav"
+        android:id="@+id/bottom_nva"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        app:menu="@menu/nav_bottom">
+        app:menu="@menu/wxcj_bottom">
 
     </android.support.design.widget.BottomNavigationView>
 

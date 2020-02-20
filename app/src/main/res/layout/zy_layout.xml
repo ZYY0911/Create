@@ -153,7 +153,8 @@
 
                 </LinearLayout>
 
-                <Button
+               <Button
+                   android:id="@+id/bt_first"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_margin="10dp"
@@ -199,6 +200,7 @@
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/bt_second"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_margin="10dp"
@@ -243,6 +245,7 @@
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/bt_third"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_margin="10dp"
@@ -287,6 +290,7 @@
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/bt_forth"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_margin="10dp"

@@ -6,14 +6,25 @@ package com.example.create.bean3;
 public class CK_CG {
     private int id;
     private String gys;
-    private int cgl,yl,price;
+    private int cgl, yl, price;
+    private int input;
 
-    public CK_CG(int id, String gys, int cgl, int yl, int price) {
+
+    public CK_CG(int id, String gys, int cgl, int yl, int price, int input) {
         this.id = id;
         this.gys = gys;
         this.cgl = cgl;
         this.yl = yl;
         this.price = price;
+        this.input = input;
+    }
+
+    public int getInput() {
+        return input;
+    }
+
+    public void setInput(int input) {
+        this.input = input;
     }
 
     public int getPrice() {

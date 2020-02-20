@@ -7,8 +7,16 @@ import org.litepal.crud.LitePalSupport;
  */
 public class CK extends LitePalSupport {
     private int id;
-    private String ylmc,xh,gys,ckr,scx,time,jsr;
+    private String ylmc,xh,gys,ckr,scx,time,jsr,kcwz;
     private int num ,price;//数量、单价
+
+    public String getKcwz() {
+        return kcwz;
+    }
+
+    public void setKcwz(String kcwz) {
+        this.kcwz = kcwz;
+    }
 
     public String getGys() {
         return gys;

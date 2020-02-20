@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="车辆编号"
+        android:textColor="#000"
+        android:id="@+id/item_clbh"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="车辆型号"
+        android:textColor="#000"
+        android:id="@+id/item_clxh"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="问题"
+        android:id="@+id/item_wt"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="报修时间"
+        android:textColor="#000"
+        android:id="@+id/item_bxsj"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="10dp"
+        android:id="@+id/item_wxsj"
+        android:text="维修时间"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:id="@+id/item_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <CheckBox
+            android:id="@+id/item_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

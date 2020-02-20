@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.6"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="光         照:"
+                    android:textColor="#000"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/tv_gz"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="温         度:"
+                    android:textColor="#000"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/tv_wd"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="电         力:"
+                    android:textColor="#000"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/tv_dl"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="电力消耗:"
+                    android:textColor="#000"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/tv_dlxh"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="原料容量:"
+                    android:textColor="#000"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/tv_ylrl"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="汽车容量:"
+                    android:textColor="#000"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/tv_qcrl"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_light"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="灯     光"
+                android:textColor="#000"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/image_light"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/icon_light_open" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_air"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="空     调"
+                android:textColor="#000"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/image_air"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/icon_air_open" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/air_add"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:src="@mipmap/icon_add" />
+
+            <TextView
+                android:id="@+id/air_wd"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="20˚C"
+                android:textColor="#f00"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/air_remove"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:src="@mipmap/icon_remove" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/add_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:gravity="right">
+
+        <Button
+            android:id="@+id/bt_add"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/gbg"
+            android:text="添加生产线"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:orientation="horizontal">
+
+        <GridView
+            android:id="@+id/grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:horizontalSpacing="20dp"
+            android:numColumns="4"
+            android:padding="20dp"
+            android:verticalSpacing="20dp">
+
+
+        </GridView>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

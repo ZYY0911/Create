@@ -30,6 +30,7 @@ import com.example.create.bean4.YGXX;
 import com.example.create.bean4.YGXX2;
 import com.example.create.util.ExcelUtil;
 import com.example.create.util.PasePing;
+import com.example.create.util.ShowDialog;
 import com.example.create.util.SideBar;
 import com.example.create.util.SimpData;
 
@@ -72,7 +73,8 @@ public class Z_YGXXActivity extends AppCompatActivity {
     private List<YGXX> parkInfo;
     private int lx = 0;
     public static final int ADD_INFO = 2;
-    public static final int UPDATA_INFO = 3;
+    public static final int UPDATE_INFO = 3;
+    public static final int OPEN_FILE = 4;
     private List<YGXX2> ygxx2s;
     private ActionBar actionBar;
     private int select_item = 0;
@@ -101,7 +103,7 @@ public class Z_YGXXActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(Z_YGXXActivity.this, Z_XGXXActivity.class);
                 intent.putExtra("data", ygxx2s.get(position));
-                startActivityForResult(intent, UPDATA_INFO);
+                startActivityForResult(intent, UPDATE_INFO);
             }
         });
         bottomNva.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -109,41 +111,45 @@ public class Z_YGXXActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.navigation_deletc:
-                        AlertDialog.Builder builder = new AlertDialog.Builder(Z_YGXXActivity.this);
-                        builder.setTitle("提示");
-                        builder.setMessage("您确定要删除所选的" + select_item + "项");
-                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                for (int i = 0; i < ygxx2s.size(); i++) {
-                                    YGXX2 ygxx2 = ygxx2s.get(i);
-                                    if (ygxx2.isXz()) {
-                                        LitePal.deleteAll(YGXX.class, "name=?", ygxx2s.get(i).getName());
+                        if (select_item==0){
+                            ShowDialog.Show("没有选择的对象",Z_YGXXActivity.this);
+                        }else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Z_YGXXActivity.this);
+                            builder.setTitle("提示");
+                            builder.setMessage("您确定要删除所选的" + select_item + "项");
+                            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    for (int i = 0; i < ygxx2s.size(); i++) {
+                                        YGXX2 ygxx2 = ygxx2s.get(i);
+                                        if (ygxx2.isXz()) {
+                                            LitePal.deleteAll(YGXX.class, "name=?", ygxx2s.get(i).getName());
+                                        }
+                                    }
+                                    dialog.dismiss();
+                                    Toast.makeText(Z_YGXXActivity.this, "成功删除" + select_item + "个信息", Toast.LENGTH_SHORT).show();
+                                    select_item = 0;
+                                    actionBar.setTitle("员工信息");
+                                    actionBar.setHomeAsUpIndicator(R.mipmap.change);
+                                    bottomNva.setVisibility(View.GONE);
+                                    adapter.setIs(false);
+                                    adapter.notifyDataSetChanged();
+                                    if (etInput.getText().equals("")) {
+                                        initData();
+                                    } else {
+                                        initData(etInput.getText().toString());
                                     }
                                 }
-                                dialog.dismiss();
-                                Toast.makeText(Z_YGXXActivity.this, "成功删除" + select_item + "个信息", Toast.LENGTH_SHORT).show();
-                                select_item = 0;
-                                actionBar.setTitle("员工信息");
-                                actionBar.setHomeAsUpIndicator(R.mipmap.change);
-                                bottomNva.setVisibility(View.GONE);
-                                adapter.setIs(false);
-                                adapter.notifyDataSetChanged();
-                                if (etInput.getText().equals("")) {
-                                    initData();
-                                } else {
-                                    initData(etInput.getText().toString());
+                            });
+                            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    selectNone();
+                                    dialog.dismiss();
                                 }
-                            }
-                        });
-                        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                selectNone();
-                                dialog.dismiss();
-                            }
-                        });
-                        builder.show();
+                            });
+                            builder.show();
+                        }
                         break;
                     case R.id.navigation_all:
                         if (select_item == ygxx2s.size()) {
@@ -309,6 +315,12 @@ public class Z_YGXXActivity extends AppCompatActivity {
                 builder.show();
                 break;
             case R.id.out_read:
+//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                intent.setType("*/*");
+//                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);//打开多个文件
+//                intent.addCategory(Intent.CATEGORY_DEFAULT);
+//                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                startActivityForResult(intent,OPEN_FILE);
                 File file = new File("/sdcard/AndroidExcel");
                 if (!file.exists()) {
                     file.mkdirs();
@@ -372,10 +384,10 @@ public class Z_YGXXActivity extends AppCompatActivity {
             case ADD_INFO:
                 if (resultCode == RESULT_OK) {
                     initData();
+                    Toast.makeText(this, "成功添加一条信息", Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(this, "成功添加一条信息", Toast.LENGTH_SHORT).show();
                 break;
-            case UPDATA_INFO:
+            case UPDATE_INFO:
                 if (resultCode == RESULT_OK) {
                     Toast.makeText(this, "修改信息成功", Toast.LENGTH_SHORT).show();
                     initData();
@@ -383,6 +395,9 @@ public class Z_YGXXActivity extends AppCompatActivity {
                     Toast.makeText(this, "删除信息", Toast.LENGTH_SHORT).show();
                     initData();
                 }
+                break;
+            case OPEN_FILE:
+
                 break;
         }
     }
@@ -406,7 +421,6 @@ public class Z_YGXXActivity extends AppCompatActivity {
             }
             Log.i("readExcelToDB", parkInfo + "--" + lx);
             for (int i = 1; i < rows; i++) {
-                //sheet.getCell(0,i))，在这里i表示第几行数据，012346表示第几列，从0开始算。
                 String name = (sheet.getCell(0, i)).getContents();
                 String sex = (sheet.getCell(1, i)).getContents();
                 String birth = (sheet.getCell(2, i)).getContents();

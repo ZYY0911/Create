@@ -62,6 +62,7 @@ public class Z_YLGLActivity extends AppCompatActivity {
         title.setText("原料库存管理--设置阈值");
         replace(new Z_YZSZFragment(Z_YLGLActivity.this));
         title1.setText("设置阈值");
+        bottomNav.setLabelVisibilityMode(1);
     }
 
     private void replace(Fragment fragment) {

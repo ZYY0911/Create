@@ -131,6 +131,15 @@
         <activity android:name=".activity4.Z_XGXXActivity">
 
         </activity>
+        <activity android:name=".activity5.Z_CJMKActivity">
+
+        </activity>
+        <activity android:name=".activity5.Z_WXCJActivity">
+
+        </activity>
+        <activity android:name=".activity5.Z_SCXActivity">
+
+        </activity>
         <activity android:name=".MainActivity">
 
         </activity>

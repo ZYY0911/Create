@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="添加生产信息"
+        android:textColor="#000"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="生产环节:"
+            android:textColor="#000"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/et_hj"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:hint="请输入生产环节"
+            android:textSize="30sp" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="生产状态:"
+            android:textColor="#000"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/spinnet_zt"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:entries="@array/sczt"
+            android:textSize="30sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="剩余天数:"
+            android:textColor="#000"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/et_syts"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:hint="请输入剩余天数"
+            android:inputType="number"
+            android:textSize="30sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="生产线:"
+            android:textColor="#000"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/spinnet_scx"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:entries="@array/scx"
+            android:textSize="30sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="请输入生产线:"
+                android:textColor="#000"
+                android:textSize="30sp" />
+
+            <EditText
+                android:id="@+id/et_scx"
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:hint="请输入生产线（格式生产线X）"
+                android:inputType="number"
+                android:textSize="30sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_submit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_weight="1"
+            android:text="提交"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/bt_exit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_weight="1"
+            android:text="取消"
+            android:textSize="30sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </LinearLayout>
+</LinearLayout>

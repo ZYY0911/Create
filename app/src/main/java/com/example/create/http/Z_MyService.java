@@ -18,7 +18,11 @@ import com.example.create.bean2.JYSJ;
 import com.example.create.bean3.CK;
 import com.example.create.bean3.RK;
 import com.example.create.bean3.YZ;
+import com.example.create.bean4.YGXX;
+import com.example.create.bean5.CJXX;
+import com.example.create.bean5.SCX;
 import com.example.create.util.SimpData;
+import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -519,7 +523,7 @@ public class Z_MyService extends NanoHTTPD {
                     }
                 case "/add_ck_info":
                     file = session.getParms();
-                    if (file.size() == 9) {
+                    if (file.size() == 10) {
                         CK ck = new CK();
                         ck.setYlmc(file.get("lymc"));
                         ck.setXh(file.get("xh"));
@@ -529,6 +533,7 @@ public class Z_MyService extends NanoHTTPD {
                         ck.setTime(SimpData.Simp("yyyy-MM-dd", new Date()));
                         ck.setJsr(file.get("jsr"));//接受人
                         ck.setNum(Integer.parseInt(file.get("num")));
+                        ck.setKcwz(file.get("kcwz"));
                         ck.setPrice(Integer.parseInt(file.get("price")));
                         ck.save();
                         return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
@@ -551,6 +556,7 @@ public class Z_MyService extends NanoHTTPD {
                         jsonObject7.put("time", rk.getTime());
                         jsonObject7.put("ckr", rk.getCkr());
                         jsonObject7.put("jsr", rk.getJsr());
+                        jsonObject7.put("kcwz", rk.getKcwz());
                         jsonArray8.put(jsonObject7);
                     }
                     JSONObject jsonObject10 = new JSONObject();
@@ -578,8 +584,95 @@ public class Z_MyService extends NanoHTTPD {
                         yz1.setGrape(Integer.parseInt(file.get("grape")));
                         yz1.setMango(Integer.parseInt(file.get("mango")));
                         yz1.setOrange(Integer.parseInt(file.get("orange")));
-                        yz1.updateAll("id=?","1");
+                        yz1.updateAll("id=?", "1");
                         return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                    } else {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
+                case "/add_gyxx_info":
+                    file = session.getParms();
+                    if (file.size() == 8) {
+                        YGXX ygxx = new YGXX();
+                        ygxx.setName(file.get("name"));
+                        ygxx.setSex(file.get("sex"));
+                        ygxx.setBirth(file.get("birth"));
+                        ygxx.setTel(file.get("tel"));
+                        ygxx.setScx(file.get("scx"));
+                        ygxx.setZw(file.get("zw"));
+                        ygxx.setEmail(file.get("email"));
+                        ygxx.setAddress(file.get("address"));
+                        ygxx.save();
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                    } else {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
+                case "/get_ygxx_info":
+                    List<YGXX> ygxxes = LitePal.findAll(YGXX.class);
+                    JSONArray jsonArray9 = new JSONArray();
+                    for (int i = 0; i < ygxxes.size(); i++) {
+                        YGXX ygxx = ygxxes.get(i);
+                        JSONObject jsonObject11 = new JSONObject();
+                        jsonObject11.put("id", ygxx.getId());
+                        jsonObject11.put("name", ygxx.getName());
+                        jsonObject11.put("sex", ygxx.getSex());
+                        jsonObject11.put("birth", ygxx.getBirth());
+                        jsonObject11.put("tel", ygxx.getTel());
+                        jsonObject11.put("scx", ygxx.getScx());
+                        jsonObject11.put("zw", ygxx.getZw());
+                        jsonObject11.put("email", ygxx.getEmail());
+                        jsonObject11.put("address", ygxx.getAddress());
+                        jsonArray9.put(jsonObject11);
+                    }
+                    JSONObject jsonObject11 = new JSONObject();
+                    jsonObject11.put("RESULT", "S");
+                    jsonObject11.put("ROWS_DETAIL", jsonArray9);
+                    return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, jsonObject11.toString());
+                case "/get_scx_info":
+                    file = session.getParms();
+                    JSONArray jsonArray10 = new JSONArray();
+                    List<SCX> scxes;
+                    scxes = LitePal.where("scx=?", file.get("scx")).find(SCX.class);
+                    for (int i = 0; i < scxes.size(); i++) {
+                        SCX scx = scxes.get(i);
+                        JSONObject jsonObject12 = new JSONObject();
+                        jsonObject12.put("id", i + 1);
+                        jsonObject12.put("cj", scx.getCj());
+                        jsonObject12.put("hj", scx.getHj());
+                        jsonObject12.put("scx", scx.getScx());
+                        jsonObject12.put("state", scx.getState());
+                        jsonObject12.put("ts", scx.getTs());
+                        jsonArray10.put(jsonObject12);
+                    }
+                    JSONObject jsonObject12 = new JSONObject();
+                    jsonObject12.put("RESULT", "S");
+                    jsonObject12.put("ROWS_DETAIL", jsonArray10);
+                    return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, jsonObject12.toString());
+                case "/add_scx_info":
+                    file = session.getParms();
+                    if (file.size() == 5) {
+                        SCX scx = new SCX();
+                        scx.setCj(Integer.parseInt(file.get("cj")));
+                        scx.setTs(file.get("ts"));
+                        scx.setState(file.get("state"));
+                        scx.setHj(file.get("hj"));
+                        scx.setScx(file.get("scx"));
+                        scx.save();
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, yseJson.toString());
+                    } else {
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
+                    }
+                case "/get_cjxx_info":
+                    file = session.getParms();
+                    if (file.size() == 1) {
+                        JSONObject jsonObject13 = new JSONObject();
+                        CJXX cjxx = LitePal.where("num", file.get("num")).find(CJXX.class).get(0);
+                        jsonObject13.put("num", cjxx.getNum());
+                        jsonObject13.put("dl", cjxx.getDl());
+                        jsonObject13.put("gz", cjxx.getGz());
+                        jsonObject13.put("qcrl", cjxx.getQcrl());
+                        jsonObject13.put("wd", cjxx.getWd());
+                        jsonObject13.put("ylrl", cjxx.getYlrl());
+                        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, jsonObject13.toString());
                     } else {
                         return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, noJson.toString());
                     }

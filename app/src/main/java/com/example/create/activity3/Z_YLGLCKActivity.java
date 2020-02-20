@@ -94,6 +94,7 @@ public class Z_YLGLCKActivity extends AppCompatActivity {
     private TextView tvDialogQx;
     private Button btDialogSubmit;
     private List<CK_CG> ck_cgs;
+    private YLGLCKAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -119,43 +120,87 @@ public class Z_YLGLCKActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!"".equals(s.toString())) {
-                    int count = Integer.parseInt(s.toString());
-                    List<RK> rks = LitePal.where("ylmc=? and xh=? and num>?", rk.getYlmc(), rk.getXh(), "0").find(RK.class);
-                    Collections.sort(rks, new Comparator<RK>() {
-                        @Override
-                        public int compare(RK o1, RK o2) {
-                            return o1.getTime().compareTo(o2.getTime());
-                        }
-                    });
-                    ck_cgs = new ArrayList<>();
-                    for (int i = 0; i < rks.size(); i++) {
-                        RK rk = rks.get(i);
-                        int yl = rk.getNum();
-                        ck_cgs.add(new CK_CG(rk.getId(), rk.getGys(), (yl >= count) ? count : yl, (yl >= count) ? (yl - count) : 0, rk.getPrice()));
-                        if (yl > count) {
-                        } else {
-                            count = count - yl;
-                        }
-                        if (yl >= Integer.parseInt(s.toString())) {
-                            break;
-                        }
-                    }
-                    int all = 0,tootal=0;
-                    for (int i = 0; i < ck_cgs.size(); i++) {
-                        all += ck_cgs.get(i).getCgl();
-                        tootal += ck_cgs.get(i).getPrice()*ck_cgs.get(i).getCgl();
-                    }
-                    toall.setText("总计:"+tootal+"元");
-                    if (all != Integer.parseInt(s.toString())) {
-                        ShowDialog.Show("最大出货量" + all + "个", Z_YLGLCKActivity.this);
-                        etChl.setText(all + "");
-                        etChl.setSelection((all + "").length());
-                    }
-                    listView.setAdapter(new YLGLCKAdapter(Z_YLGLCKActivity.this, R.layout.ylglck_item, ck_cgs, true));
+                if (adapter==null){
+                    initEdit(s);
+                }else if (!adapter.isIs()){
+
+                }else if (adapter.isIs()){
+                    initEdit(s);
                 }
             }
         });
+    }
+
+    private void initEdit(Editable s) {
+        if (!"".equals(s.toString())) {
+            int count = Integer.parseInt(s.toString());
+            List<RK> rks = LitePal.where("ylmc=? and xh=? and num>?", rk.getYlmc(), rk.getXh(), "0").find(RK.class);
+            Collections.sort(rks, new Comparator<RK>() {
+                @Override
+                public int compare(RK o1, RK o2) {
+                    return o1.getTime().compareTo(o2.getTime());
+                }
+            });
+            ck_cgs = new ArrayList<>();
+            for (int i = 0; i < rks.size(); i++) {
+                RK rk = rks.get(i);
+                int yl = rk.getNum();
+                ck_cgs.add(new CK_CG(rk.getId(), rk.getGys(), (yl >= count) ? count : yl, (yl >= count) ? (yl - count) : 0, rk.getPrice(), (yl >= count) ? count : yl));
+                if (yl > count) {
+                } else {
+                    count = count - yl;
+                }
+                if (yl >= Integer.parseInt(s.toString())) {
+                    break;
+                }
+            }
+            int all = 0, tootal = 0;
+            for (int i = 0; i < ck_cgs.size(); i++) {
+                all += ck_cgs.get(i).getCgl();
+                tootal += ck_cgs.get(i).getPrice() * ck_cgs.get(i).getCgl();
+            }
+            toall.setText("总计:" + tootal + "元");
+            if (all != Integer.parseInt(s.toString())) {
+                ShowDialog.Show("最大出货量" + all + "个", Z_YLGLCKActivity.this);
+                etChl.setText(all + "");
+                etChl.setSelection((all + "").length());
+            }
+            adapter = new YLGLCKAdapter(Z_YLGLCKActivity.this, R.layout.ylglck_item, ck_cgs, true);
+            listView.setAdapter(adapter);
+            adapter.setInputNum(new YLGLCKAdapter.InputNum() {
+                @Override
+                public void inputNum(int position, String num, EditText editText) {
+                    CK_CG ck_cg = ck_cgs.get(position);
+                    int cgl = Integer.parseInt(num);
+                    int all = ck_cg.getYl() + ck_cg.getCgl();
+                    if (cgl > all) {
+                        ck_cg.setYl(0);
+                        ck_cg.setCgl(all);
+                        ck_cg.setInput(all);
+                    } else {
+                        ck_cg.setCgl(cgl);
+                        ck_cg.setYl(all - cgl);
+                        ck_cg.setInput(cgl);
+                    }
+                    ck_cgs.set(position, ck_cg);
+                    editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                            if (!hasFocus) {
+                                int tootal = 0, all = 0;
+                                for (int i = 0; i < ck_cgs.size(); i++) {
+                                    tootal += ck_cgs.get(i).getPrice() * ck_cgs.get(i).getCgl();
+                                    all += ck_cgs.get(i).getInput();
+                                }
+                                toall.setText("总计:" + tootal + "元");
+                                etChl.setText(all + "");
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
+                }
+            });
+        }
     }
 
     private void initView() {
@@ -172,6 +217,14 @@ public class Z_YLGLCKActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.bt_sg:
+                if (adapter != null) {
+                    if (adapter.isIs()) {
+                        adapter.setIs(false);
+                    } else {
+                        adapter.setIs(true);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
                 break;
             case R.id.layout_first:
                 scx = "生产线一";
@@ -250,6 +303,7 @@ public class Z_YLGLCKActivity extends AppCompatActivity {
                     ck.setTime(tvDialogSj.getText().toString());
                     ck.setScx(scx);
                     ck.setPrice(ck_cg.getPrice());
+                    ck.setKcwz(rk.getLocation());
                     ck.save();
                     RK rk = new RK();
                     if (ck_cg.getYl() == 0) {

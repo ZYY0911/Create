@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,8 +17,11 @@ import com.example.create.R;
 import com.example.create.activity2.Z_GYSActivity;
 import com.example.create.activity3.Z_YLGLActivity;
 import com.example.create.activity4.Z_YGXXActivity;
+import com.example.create.activity5.Z_CJMKActivity;
+import com.example.create.activity5.Z_WXCJActivity;
 import com.example.create.bean.Q_YHZC_SQL;
 import com.example.create.http.Z_MyService;
+import com.example.create.http.Z_MyService2;
 import com.example.create.net.VolleyLo;
 import com.example.create.net.VolleyTo;
 import com.example.create.util.SimpData;
@@ -58,7 +62,7 @@ public class Z_ZYActivity extends AppCompatActivity {
     private TextView timg5;
     private boolean isLoop = true;
     private AppClient appClient;
-    private Z_MyService z_myService;
+    private Z_MyService2 z_myService;
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -71,6 +75,10 @@ public class Z_ZYActivity extends AppCompatActivity {
     private TextView userId;
     private TextView userName;
     private TextView userMoney;
+    private Button btFirst;
+    private Button btSecond;
+    private Button btThird;
+    private Button btForth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,7 +88,7 @@ public class Z_ZYActivity extends AppCompatActivity {
         initClick();
         initData();
         initVolley();
-        z_myService = new Z_MyService(3333, appClient);
+        z_myService = new Z_MyService2(3333, appClient);
         try {
             z_myService.start();
         } catch (IOException e) {
@@ -136,9 +144,9 @@ public class Z_ZYActivity extends AppCompatActivity {
             }
         }).start();
         userName.setText(AppClient.getName());
-        Q_YHZC_SQL q_yhzc_sql = LitePal.where("yhm=?",AppClient.getName()).find(Q_YHZC_SQL.class).get(0);
-        userId.setText(q_yhzc_sql.getId()+"");
-        userMoney.setText(q_yhzc_sql.getJine()+"元");
+        Q_YHZC_SQL q_yhzc_sql = LitePal.where("yhm=?", AppClient.getName()).find(Q_YHZC_SQL.class).get(0);
+        userId.setText(q_yhzc_sql.getId() + "");
+        userMoney.setText(q_yhzc_sql.getJine() + "元");
 
     }
 
@@ -172,7 +180,44 @@ public class Z_ZYActivity extends AppCompatActivity {
                 startActivity(new Intent(Z_ZYActivity.this, Z_YGXXActivity.class));
             }
         });
-
+        layoutWxcj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Z_ZYActivity.this, Z_WXCJActivity.class));
+            }
+        });
+        btFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Z_ZYActivity.this,Z_CJMKActivity.class);
+                intent.putExtra("index",0);
+                startActivity(intent);
+            }
+        });
+        btSecond.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Z_ZYActivity.this,Z_CJMKActivity.class);
+                intent.putExtra("index",1);
+                startActivity(intent);
+            }
+        });
+        btThird.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Z_ZYActivity.this,Z_CJMKActivity.class);
+                intent.putExtra("index",2);
+                startActivity(intent);
+            }
+        });
+        btForth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Z_ZYActivity.this,Z_CJMKActivity.class);
+                intent.putExtra("index",3);
+                startActivity(intent);
+            }
+        });
     }
 
     private void ImageBg(final int index, TextView textView) {
@@ -225,5 +270,9 @@ public class Z_ZYActivity extends AppCompatActivity {
         userId = findViewById(R.id.userId);
         userName = findViewById(R.id.user_name);
         userMoney = findViewById(R.id.user_money);
+        btFirst = findViewById(R.id.bt_first);
+        btSecond = findViewById(R.id.bt_second);
+        btThird = findViewById(R.id.bt_third);
+        btForth = findViewById(R.id.bt_forth);
     }
 }
